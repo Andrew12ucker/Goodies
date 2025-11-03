@@ -1,0 +1,30 @@
+name: CI
+on:
+  push:
+    branches: [ main, dev, feature/** ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd server
+          npm ci
+
+      - name: Lint and test
+        run: |
+          cd server
+          npm run lint --if-present
+          npm test --if-present
