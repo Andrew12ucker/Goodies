@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Goodies | Admin Panel</title>
+<!-- CSS -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/utilities.css">
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <header class="site-header container">
+      <a href="/" class="logo"><img src="/assets/logo.png" alt="Goodies Logo" /></a>
+      <h1>Admin Control Panel</h1>
+    </header>
+
+    <main class="container admin-dashboard fade-in">
+      <section class="card">
+        <h2>Maintenance Mode</h2>
+        <p>Toggle maintenance mode across the site.</p>
+        <button id="toggleMaintenance" class="cta-btn">Enable Maintenance Mode</button>
+        <p id="maintenanceMsg"></p>
+      </section>
+
+      <section class="card">
+        <h2>Platform Metrics</h2>
+        <div id="metrics">
+          <p>Loading metrics...</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>User Management</h2>
+        <p>Feature coming soon — manage users and campaigns here.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Goodies Admin © 2025</p>
+    </footer>
+  </div>
+
+  <script>
+    const adminKey = prompt("Enter admin key:");
+    const msg = document.getElementById("maintenanceMsg");
+    const button = document.getElementById("toggleMaintenance");
+
+    async function updateMetrics() {
+      const res = await fetch("/api/admin/metrics", { headers: { "x-admin-key": adminKey } });
+      const data = await res.json();
+      document.getElementById("metrics").innerHTML = `
+        <p><strong>Total Users:</strong> ${data.users}</p>
+        <p><strong>Total Campaigns:</strong> ${data.campaigns}</p>
+        <p><strong>Total Donations:</strong> $${data.totalDonations}</p>
+      `;
+    }
+
+    button.addEventListener("click", async () => {
+      const res = await fetch("/api/admin/maintenance", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-key": adminKey,
+        },
+      });
+      const data = await res.json();
+      msg.textContent = data.message;
+      button.textContent = data.active ? "Disable Maintenance Mode" : "Enable Maintenance Mode";
+    });
+
+    updateMetrics();
+  </script>
+</body>
+</html>

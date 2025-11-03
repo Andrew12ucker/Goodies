@@ -1,0 +1,4 @@
+mkdir -p server/data
+cat > server/data/campaigns.json <<'EOF'
+[]
+EOF

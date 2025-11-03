@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Goodies | Create a Campaign</title>
+  <meta name="description" content="Start your campaign on Goodies — share your mission and inspire your community." />
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+
+  <!-- Unified Production CSS -->
+  <link rel="stylesheet" href="/css/production.css" />
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <!-- Header -->
+    <header class="site-header container">
+      <div class="logo"><a href="/"><img src="/assets/logo.png" alt="Goodies Logo" /></a></div>
+      <nav id="mainNav" class="main-nav desktop-only">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/discover" class="nav-link">Discover</a>
+        <a href="/fundraise" class="nav-link active">Fundraise</a>
+        <a href="/directory" class="nav-link">Directory</a>
+        <a href="/campaigns" class="nav-link">Campaigns</a>
+        <a href="/about" class="nav-link">About</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero small-hero">
+      <h1>Create Your Campaign</h1>
+      <p>Tell your story. Inspire generosity. Change lives.</p>
+    </section>
+
+    <!-- Create Campaign Form -->
+    <section class="container section-padding">
+      <form id="createCampaignForm" class="campaign-form" enctype="multipart/form-data">
+        <label for="title">Campaign Title</label>
+        <input type="text" id="title" name="title" placeholder="E.g. Build a Community Garden" required />
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="5" placeholder="Describe your mission and impact..." required></textarea>
+
+        <label for="goal">Funding Goal (USD)</label>
+        <input type="number" id="goal" name="goal" placeholder="5000" min="1" required />
+
+        <label for="deadline">Deadline</label>
+        <input type="date" id="deadline" name="deadline" required />
+
+        <!-- Image Upload -->
+        <label for="imageUploadInput">Campaign Image</label>
+        <div class="image-upload" id="uploadZone">
+          <p>Click or drag an image to upload</p>
+          <input type="file" id="imageUploadInput" accept="image/*" />
+        </div>
+        <div class="image-preview" id="imagePreview"></div>
+
+        <button type="submit" class="cta-btn">Create Campaign</button>
+        <p id="formFeedback" class="form-feedback"></p>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Goodies ® — Building through community.</p>
+    </footer>
+  </div>
+
+  <!-- Production JS Bundle -->
+  <script defer src="/javascript/production.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("createCampaignForm");
+      const feedback = document.getElementById("formFeedback");
+      const imageInput = document.getElementById("imageUploadInput");
+      const preview = document.getElementById("imagePreview");
+      const uploadZone = document.getElementById("uploadZone");
+
+      // ✅ Live Image Preview
+      imageInput.addEventListener("change", () => {
+        const file = imageInput.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = e => {
+          preview.innerHTML = `<img src="${e.target.result}" alt="Campaign Preview" />`;
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // ✅ Drag-and-Drop Support
+      ["dragenter", "dragover"].forEach(evt => {
+        uploadZone.addEventListener(evt, e => {
+          e.preventDefault();
+          e.stopPropagation();
+          uploadZone.style.background = "rgba(212,175,55,0.1)";
+        });
+      });
+      ["dragleave", "drop"].forEach(evt => {
+        uploadZone.addEventListener(evt, e => {
+          e.preventDefault();
+          e.stopPropagation();
+          uploadZone.style.background = "transparent";
+        });
+      });
+      uploadZone.addEventListener("drop", e => {
+        const file = e.dataTransfer.files[0];
+        if (!file) return;
+        imageInput.files = e.dataTransfer.files;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          preview.innerHTML = `<img src="${ev.target.result}" alt="Campaign Preview" />`;
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // ✅ Submit Logic
+      form.addEventListener("submit", async e => {
+        e.preventDefault();
+        const token = localStorage.getItem("goodies_token");
+        if (!token) {
+          feedback.textContent = "Please log in to create a campaign.";
+          feedback.classList.add("error");
+          return;
+        }
+
+        const body = new FormData();
+        body.append("title", form.title.value.trim());
+        body.append("description", form.description.value.trim());
+        body.append("goal", form.goal.value);
+        body.append("deadline", form.deadline.value);
+        if (imageInput.files[0]) body.append("image", imageInput.files[0]);
+
+        feedback.textContent = "Creating your campaign...";
+        try {
+          const res = await fetch("/api/campaigns", {
+            method: "POST",
+            headers: { Authorization: `Bearer ${token}` },
+            body
+          });
+          const data = await res.json();
+          if (res.ok) {
+            feedback.textContent = "✅ Campaign created successfully!";
+            feedback.classList.add("success");
+            form.reset();
+            preview.innerHTML = "";
+          } else {
+            feedback.textContent = data.message || "❌ Failed to create campaign.";
+            feedback.classList.add("error");
+          }
+        } catch {
+          feedback.textContent = "Server error. Please try again later.";
+          feedback.classList.add("error");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

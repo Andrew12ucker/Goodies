@@ -1,0 +1,20 @@
+/* ================================
+   About Page Styles
+================================= */
+
+.about-section {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.about-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.about-section p {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: #555;
+}

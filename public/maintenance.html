@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Goodies | Maintenance Mode</title>
+  <meta name="description" content="Goodies is temporarily offline for maintenance. We'll be back soon!" />
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+<!-- CSS -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/utilities.css">
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <!-- Header -->
+    <header class="site-header container">
+      <div class="logo">
+        <a href="/">
+          <img src="/assets/logo.png" alt="Goodies Logo" />
+        </a>
+      </div>
+    </header>
+
+    <!-- Maintenance Section -->
+    <main class="error-container section-padding">
+      <div class="card error-card">
+        <h1>We’ll Be Back Soon</h1>
+        <h2>Goodies is temporarily offline for scheduled maintenance.</h2>
+        <p>
+          We’re upgrading our systems to serve you better.  
+          During this time, some features may be unavailable.  
+          Please check back shortly or follow us for updates.
+        </p>
+
+        <div class="status-box">
+          <div class="loader"></div>
+          <p>Estimated completion: within a few minutes</p>
+        </div>
+
+        <a href="/" class="cta-btn">Return Home</a>
+
+        <div class="social-follow">
+          <p>Follow us for updates:</p>
+          <div class="footer-social">
+            <a href="https://twitter.com/" target="_blank" class="social-btn" title="Twitter" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.86 1.09A4.5 4.5 0 0 0 12 4.47v.56A12.94 12.94 0 0 1 3 1s-4 9 5 13a13 13 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+            </a>
+            <a href="https://linkedin.com/" target="_blank" class="social-btn" title="LinkedIn" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11.75 19h-2.5v-8.98h2.5v8.98zm-1.25-10.24c-.797 0-1.29-.53-1.29-1.19 0-.67.51-1.19 1.32-1.19.81 0 1.29.52 1.31 1.19 0 .66-.5 1.19-1.34 1.19zm12 10.24h-2.5v-4.8c0-1.21-.43-2.04-1.5-2.04-.82 0-1.31.55-1.53 1.08-.08.2-.1.48-.1.76v4.99h-2.5s.03-8.1 0-8.98h2.5v1.27c.33-.51.92-1.23 2.24-1.23 1.64 0 2.87 1.07 2.87 3.37v5.57z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Goodies ® — Building through community.</p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script defer src="/javascript/ui.js"></script>
+  <script>
+    // Optional subtle fade or pulse animation for loader
+    document.addEventListener("DOMContentLoaded", () => {
+      const loader = document.querySelector(".loader");
+      setInterval(() => loader.classList.toggle("active"), 800);
+    });
+  </script>
+
+  <style>
+    .error-container {
+      text-align: center;
+    }
+
+    .error-card {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 3rem 2rem;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      animation: fadeInUp 0.8s ease;
+    }
+
+    h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: #666;
+    }
+
+    .status-box {
+      margin: 1.5rem 0;
+    }
+
+    .loader {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 0.5rem;
+      border-radius: 50%;
+      border: 3px solid #ccc;
+      border-top: 3px solid #000;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cta-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #000;
+      color: #fff;
+      border-radius: 2rem;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background: #333;
+    }
+
+    .social-follow {
+      margin-top: 2rem;
+    }
+
+    .social-follow p {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</body>
+</html>

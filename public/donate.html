@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Goodies | Donate to a Campaign</title>
+  <meta name="description" content="Support meaningful campaigns through Goodies — make a donation with Stripe or PayPal." />
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="/css/production.css" />
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <!-- Header -->
+    <header class="site-header container" role="banner">
+      <div class="logo">
+        <a href="/"><img src="/assets/logo.png" alt="Goodies Logo" /></a>
+      </div>
+      <nav id="mainNav" class="main-nav desktop-only" aria-label="Main navigation">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/discover">Discover</a>
+        <a class="nav-link" href="/fundraise">Fundraise</a>
+        <a class="nav-link" href="/directory">Directory</a>
+        <a class="nav-link active" href="/campaigns">Campaigns</a>
+        <a class="nav-link" href="/about">About</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-icon-btn" href="/login" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Donation Hero -->
+    <section class="hero small-hero">
+      <h1>Support This Campaign</h1>
+      <p>Every contribution moves us closer to our goal.</p>
+    </section>
+
+    <!-- Donation Section -->
+    <section class="container donation-section">
+      <div class="campaign-summary">
+        <h2 id="campaignTitle">Loading campaign...</h2>
+        <p id="campaignDesc">Please wait while we fetch details.</p>
+
+        <div class="progress-wrap">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+          </div>
+          <p id="progressText">0% funded</p>
+        </div>
+      </div>
+
+      <form id="donationForm" class="donation-form">
+        <label for="amount">Donation Amount (USD)</label>
+        <input type="number" id="amount" name="amount" placeholder="25" min="1" required />
+
+        <div class="button-group">
+          <button type="button" id="donateStripe" class="cta-btn">Donate with Stripe</button>
+          <button type="button" id="donatePayPal" class="cta-btn secondary">Donate with PayPal</button>
+        </div>
+
+        <p id="donationFeedback" class="form-feedback"></p>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Goodies ® — Building through community.</p>
+    </footer>
+  </div>
+
+  <!-- Unified JS -->
+  <script defer src="/javascript/production.js"></script>
+
+  <!-- Inline page logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const params = new URLSearchParams(window.location.search);
+      const campaignId = params.get("id");
+      const token = localStorage.getItem("goodies_token");
+
+      const titleEl = document.getElementById("campaignTitle");
+      const descEl = document.getElementById("campaignDesc");
+      const fill = document.getElementById("progressFill");
+      const text = document.getElementById("progressText");
+      const feedback = document.getElementById("donationFeedback");
+
+      if (!campaignId) {
+        titleEl.textContent = "Campaign not found.";
+        descEl.textContent = "";
+        return;
+      }
+
+      async function loadCampaign() {
+        try {
+          const res = await fetch(`/api/campaigns/${campaignId}`);
+          const campaign = await res.json();
+          if (res.ok) {
+            titleEl.textContent = campaign.title;
+            descEl.textContent = campaign.description;
+            const percent = Math.min((campaign.currentAmount / campaign.goal) * 100, 100).toFixed(1);
+            fill.style.width = percent + "%";
+            text.textContent = `${percent}% funded`;
+          }
+        } catch {
+          titleEl.textContent = "Unable to load campaign.";
+        }
+      }
+
+      // Initial load
+      await loadCampaign();
+
+      // 🔄 Real-time progress polling (every 7s)
+      setInterval(loadCampaign, 7000);
+
+      async function handleDonation(provider) {
+        const amount = parseFloat(document.getElementById("amount").value);
+        if (!amount || amount <= 0) {
+          feedback.textContent = "Please enter a valid donation amount.";
+          feedback.classList.add("error");
+          return;
+        }
+
+        feedback.textContent = `Processing your donation via ${provider}...`;
+
+        const endpoint = provider === "Stripe" ? "/api/donations/stripe" : "/api/donations/paypal";
+
+        try {
+          const res = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({ campaignId, amount })
+          });
+          const data = await res.json();
+
+          if (res.ok && (data.url || data.approveLink)) {
+            feedback.textContent = "Redirecting to secure checkout...";
+            window.location = data.url || data.approveLink;
+          } else {
+            feedback.textContent = data.message || "Payment could not be processed.";
+            feedback.classList.add("error");
+          }
+        } catch (err) {
+          console.error("Donation error:", err);
+          feedback.textContent = "Network error. Please try again later.";
+          feedback.classList.add("error");
+        }
+      }
+
+      document.getElementById("donateStripe").addEventListener("click", () => handleDonation("Stripe"));
+      document.getElementById("donatePayPal").addEventListener("click", () => handleDonation("PayPal"));
+    });
+  </script>
+</body>
+</html>

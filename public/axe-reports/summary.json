@@ -1,0 +1,34 @@
+[
+  {
+    "file": "about.html",
+    "error": "Required \"window\" or \"document\" globals not defined and cannot be deduced from the context. Either set the globals before running or pass in a valid Element."
+  },
+  {
+    "file": "create.html",
+    "error": "Required \"window\" or \"document\" globals not defined and cannot be deduced from the context. Either set the globals before running or pass in a valid Element."
+  },
+  {
+    "file": "dashboard.html",
+    "error": "Required \"window\" or \"document\" globals not defined and cannot be deduced from the context. Either set the globals before running or pass in a valid Element."
+  },
+  {
+    "file": "directory.html",
+    "error": "Required \"window\" or \"document\" globals not defined and cannot be deduced from the context. Either set the globals before running or pass in a valid Element."
+  },
+  {
+    "file": "index.html",
+    "error": "Required \"window\" or \"document\" globals not defined and cannot be deduced from the context. Either set the globals before running or pass in a valid Element."
+  },
+  {
+    "file": "login.html",
+    "error": "Required \"window\" or \"document\" globals not defined and cannot be deduced from the context. Either set the globals before running or pass in a valid Element."
+  },
+  {
+    "file": "register.html",
+    "error": "Required \"window\" or \"document\" globals not defined and cannot be deduced from the context. Either set the globals before running or pass in a valid Element."
+  },
+  {
+    "file": "reset.html",
+    "error": "Required \"window\" or \"document\" globals not defined and cannot be deduced from the context. Either set the globals before running or pass in a valid Element."
+  }
+]
