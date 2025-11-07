@@ -1,162 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Goodies | Donate to a Campaign</title>
-  <meta name="description" content="Support meaningful campaigns through Goodies — make a donation with Stripe or PayPal." />
-  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="/css/production.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate to Campaign | Goodies</title>
+  
+  <!-- SEO & Meta -->
+  <meta name="description" content="Support meaningful campaigns through Goodies – make a donation with Stripe or PayPal.">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Security -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://js.stripe.com https://www.paypal.com;
+    style-src 'self' https://fonts.googleapis.com;
+    img-src 'self' data: https:;
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self' https://api.stripe.com https://www.paypal.com wss: ws:;
+    frame-src https://js.stripe.com https://www.paypal.com;
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/production.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div class="page-wrapper">
+    
     <!-- Header -->
     <header class="site-header container" role="banner">
       <div class="logo">
-        <a href="/"><img src="/assets/logo.png" alt="Goodies Logo" /></a>
+        <a href="/" aria-label="Goodies Homepage">
+          <img src="/assets/logo.png" alt="Goodies Logo" width="120" height="40">
+        </a>
       </div>
-      <nav id="mainNav" class="main-nav desktop-only" aria-label="Main navigation">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/discover">Discover</a>
-        <a class="nav-link" href="/fundraise">Fundraise</a>
-        <a class="nav-link" href="/directory">Directory</a>
-        <a class="nav-link active" href="/campaigns">Campaigns</a>
-        <a class="nav-link" href="/about">About</a>
+
+      <nav id="mainNav" class="main-nav desktop-only" role="navigation" aria-label="Main navigation">
+        
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Discover <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/campaigns">Campaigns</a></li>
+            <li><a class="dropdown-item" href="/directory">Businesses</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Fundraise <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/donate">Donate</a></li>
+            <li><a class="dropdown-item" href="/create">Start a Campaign</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            About <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/about">Our Mission</a></li>
+            <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
+          </ul>
+        </div>
       </nav>
+
       <div class="header-actions">
-        <a class="header-icon-btn" href="/login" aria-label="Account">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-            <circle cx="12" cy="7" r="4" />
+        <button class="header-icon-btn" data-toggle-search aria-label="Search" title="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <a class="header-icon-btn" href="/login" aria-label="Account" title="Account">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
           </svg>
         </a>
+
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="mainNav" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <div class="header-search" role="search">
+        <input type="search" placeholder="Search campaigns..." aria-label="Search site">
       </div>
     </header>
 
-    <!-- Donation Hero -->
+    <!-- Hero -->
     <section class="hero small-hero">
       <h1>Support This Campaign</h1>
       <p>Every contribution moves us closer to our goal.</p>
     </section>
 
-    <!-- Donation Section -->
+    <!-- Campaign Summary & Donation -->
     <section class="container donation-section">
-      <div class="campaign-summary">
-        <h2 id="campaignTitle">Loading campaign...</h2>
-        <p id="campaignDesc">Please wait while we fetch details.</p>
-
-        <div class="progress-wrap">
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      <div class="donation-layout">
+        
+        <!-- Campaign Info -->
+        <aside class="campaign-summary card" aria-label="Campaign information">
+          <div id="campaignImage" class="campaign-image">
+            <div class="image-skeleton" aria-label="Loading campaign image"></div>
           </div>
-          <p id="progressText">0% funded</p>
+          
+          <div class="campaign-content">
+            <h2 id="campaignTitle">
+              <div class="text-skeleton" aria-label="Loading campaign title"></div>
+            </h2>
+            <p id="campaignDesc" class="campaign-description">
+              <div class="text-skeleton" aria-label="Loading campaign description"></div>
+              <div class="text-skeleton"></div>
+            </p>
+
+            <div class="progress-section">
+              <div class="progress-stats">
+                <div class="stat">
+                  <strong id="currentAmount">$0</strong>
+                  <span>raised</span>
+                </div>
+                <div class="stat">
+                  <strong id="goalAmount">$0</strong>
+                  <span>goal</span>
+                </div>
+                <div class="stat">
+                  <strong id="backerCount">0</strong>
+                  <span>backers</span>
+                </div>
+              </div>
+              
+              <div class="progress-wrap">
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" id="progressFill" style="width:0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Campaign funding progress"></div>
+                </div>
+                <p id="progressText" class="progress-label">0% funded</p>
+              </div>
+              
+              <div class="campaign-meta">
+                <p id="daysRemaining">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  <span>Loading...</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Recent Donations -->
+            <div class="recent-donations">
+              <h3>Recent Supporters</h3>
+              <div id="recentDonationsList" class="donations-list">
+                <p class="loading-text">Loading recent donations...</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Donation Form -->
+        <div class="donation-form-wrapper">
+          <form id="donationForm" class="donation-form card" novalidate>
+            <h2>Make a Donation</h2>
+            
+            <!-- Amount Selection -->
+            <div class="form-group">
+              <label for="amount">Donation Amount (USD) <span class="required">*</span></label>
+              
+              <!-- Quick Amount Buttons -->
+              <div class="amount-buttons" role="group" aria-label="Quick donation amounts">
+                <button type="button" class="amount-btn" data-amount="10" aria-label="Donate $10">$10</button>
+                <button type="button" class="amount-btn" data-amount="25" aria-label="Donate $25">$25</button>
+                <button type="button" class="amount-btn" data-amount="50" aria-label="Donate $50">$50</button>
+                <button type="button" class="amount-btn" data-amount="100" aria-label="Donate $100">$100</button>
+              </div>
+              
+              <!-- Custom Amount Input -->
+              <div class="input-prefix">
+                <span class="prefix" aria-hidden="true">($)</span>
+                <input 
+                  type="number" 
+                  id="amount" 
+                  name="amount" 
+                  placeholder="      Enter custom amount" 
+                  min="1"
+                  max="100000"
+                  step="1"
+                  required 
+                  aria-required="true"
+                  aria-describedby="amount-help amount-error"
+                  inputmode="decimal"
+                >
+              </div>
+              <small id="amount-help" class="form-help">Minimum donation: $1</small>
+              <span id="amount-error" class="error-message" role="alert"></span>
+            </div>
+
+            <!-- Optional Message -->
+            <div class="form-group">
+              <label for="donationMessage">Leave a Message (Optional)</label>
+              <textarea 
+                id="donationMessage" 
+                name="message" 
+                rows="3" 
+                placeholder="Share your support..."
+                maxlength="500"
+                aria-describedby="message-help"
+              ></textarea>
+              <small id="message-help" class="form-help">
+                <span id="messageCharCount">0</span> / 500 characters
+              </small>
+            </div>
+
+            <!-- Anonymous Option -->
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="anonymousDonation" name="anonymous" aria-describedby="anonymous-help">
+                <span>Make this donation anonymous</span>
+              </label>
+              <small id="anonymous-help" class="form-help">Your name won't be displayed publicly</small>
+            </div>
+
+            <!-- Payment Method Selection -->
+            <div class="payment-methods">
+              <h3>Payment Method</h3>
+              <div class="button-group vertical">
+                <button 
+                  type="button" 
+                  id="donateStripe" 
+                  class="cta-btn payment-btn"
+                  aria-describedby="stripe-help"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/>
+                  </svg>
+                  <span>Donate with Stripe</span>
+                </button>
+                <small id="stripe-help" class="payment-help">Secure payment processing with credit card</small>
+                
+                <button 
+                  type="button" 
+                  id="donatePayPal" 
+                  class="cta-btn secondary payment-btn"
+                  aria-describedby="paypal-help"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M20.067 8.478c.492.88.556 2.014.3 3.327-.74 3.806-3.276 5.12-6.514 5.12h-.5a.805.805 0 0 0-.794.68l-.04.22-.63 3.993-.028.15a.806.806 0 0 1-.795.68H7.803c-.43 0-.727-.42-.588-.833l.03-.095 1.49-9.455L9.883 4.5h2.768c1.737 0 3.002.368 3.913 1.234.536.51.93 1.162 1.12 1.96.09.387.147.798.147 1.235 0 .478-.068.984-.192 1.549h.428z"/>
+                  </svg>
+                  <span>Donate with PayPal</span>
+                </button>
+                <small id="paypal-help" class="payment-help">Fast and trusted payment platform</small>
+              </div>
+            </div>
+
+            <div id="donationFeedback" class="form-feedback" role="status" aria-live="polite"></div>
+
+            <!-- Security Badge -->
+            <div class="security-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <small>Your donation is secure and encrypted</small>
+            </div>
+          </form>
+
+          <!-- Impact Info -->
+          <div class="info-box">
+            <h4>💚 Impact Your Donation Makes</h4>
+            <p>Your contribution directly supports this campaign's mission and helps bring this project to life. Thank you for being part of the change!</p>
+          </div>
         </div>
       </div>
-
-      <form id="donationForm" class="donation-form">
-        <label for="amount">Donation Amount (USD)</label>
-        <input type="number" id="amount" name="amount" placeholder="25" min="1" required />
-
-        <div class="button-group">
-          <button type="button" id="donateStripe" class="cta-btn">Donate with Stripe</button>
-          <button type="button" id="donatePayPal" class="cta-btn secondary">Donate with PayPal</button>
-        </div>
-
-        <p id="donationFeedback" class="form-feedback"></p>
-      </form>
     </section>
 
     <!-- Footer -->
-    <footer class="site-footer">
-      <p>Goodies ® — Building through community.</p>
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-content container">
+        <div class="footer-brand">
+          <img src="/assets/logo.png" alt="Goodies Logo" width="100" height="33">
+          <p>Goodies® – Building through community.</p>
+        </div>
+        
+        <div class="footer-social" aria-label="Social media links">
+          <a href="https://twitter.com/goodies" class="social-btn" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.86 1.09A4.5 4.5 0 0 0 12 4.47v.56A12.94 12.94 0 0 1 3 1s-4 9 5 13a13 13 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+            </svg>
+          </a>
+          <a href="https://linkedin.com/company/goodies" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11.75 19h-2.5v-8.98h2.5v8.98zm-1.25-10.24c-.797 0-1.29-.53-1.29-1.19 0-.67.51-1.19 1.32-1.19.81 0 1.29.52 1.31 1.19 0 .66-.5 1.19-1.34 1.19zm12 10.24h-2.5v-4.8c0-1.21-.43-2.04-1.5-2.04-.82 0-1.31.55-1.53 1.08-.08.2-.1.48-.1.76v4.99h-2.5s.03-8.1 0-8.98h2.5v1.27c.33-.51.92-1.23 2.24-1.23 1.64 0 2.87 1.07 2.87 3.37v5.57z"/>
+            </svg>
+          </a>
+          <a href="https://facebook.com/goodies" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8.9v-2.9h1.6V9.4c0-1.6.95-2.5 2.4-2.5.7 0 1.4.13 1.4.13v1.6h-.82c-.8 0-1.05.5-1.05 1v1.2h1.78l-.28 2.9h-1.5v7A10 10 0 0 0 22 12z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom container">
+        <p>&copy; 2025 Goodies. All rights reserved.</p>
+      </div>
     </footer>
   </div>
 
-  <!-- Unified JS -->
+  <!-- Scripts -->
   <script defer src="/javascript/production.js"></script>
-
-  <!-- Inline page logic -->
-  <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      const params = new URLSearchParams(window.location.search);
-      const campaignId = params.get("id");
-      const token = localStorage.getItem("goodies_token");
-
-      const titleEl = document.getElementById("campaignTitle");
-      const descEl = document.getElementById("campaignDesc");
-      const fill = document.getElementById("progressFill");
-      const text = document.getElementById("progressText");
-      const feedback = document.getElementById("donationFeedback");
-
-      if (!campaignId) {
-        titleEl.textContent = "Campaign not found.";
-        descEl.textContent = "";
-        return;
-      }
-
-      async function loadCampaign() {
-        try {
-          const res = await fetch(`/api/campaigns/${campaignId}`);
-          const campaign = await res.json();
-          if (res.ok) {
-            titleEl.textContent = campaign.title;
-            descEl.textContent = campaign.description;
-            const percent = Math.min((campaign.currentAmount / campaign.goal) * 100, 100).toFixed(1);
-            fill.style.width = percent + "%";
-            text.textContent = `${percent}% funded`;
-          }
-        } catch {
-          titleEl.textContent = "Unable to load campaign.";
-        }
-      }
-
-      // Initial load
-      await loadCampaign();
-
-      // 🔄 Real-time progress polling (every 7s)
-      setInterval(loadCampaign, 7000);
-
-      async function handleDonation(provider) {
-        const amount = parseFloat(document.getElementById("amount").value);
-        if (!amount || amount <= 0) {
-          feedback.textContent = "Please enter a valid donation amount.";
-          feedback.classList.add("error");
-          return;
-        }
-
-        feedback.textContent = `Processing your donation via ${provider}...`;
-
-        const endpoint = provider === "Stripe" ? "/api/donations/stripe" : "/api/donations/paypal";
-
-        try {
-          const res = await fetch(endpoint, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify({ campaignId, amount })
-          });
-          const data = await res.json();
-
-          if (res.ok && (data.url || data.approveLink)) {
-            feedback.textContent = "Redirecting to secure checkout...";
-            window.location = data.url || data.approveLink;
-          } else {
-            feedback.textContent = data.message || "Payment could not be processed.";
-            feedback.classList.add("error");
-          }
-        } catch (err) {
-          console.error("Donation error:", err);
-          feedback.textContent = "Network error. Please try again later.";
-          feedback.classList.add("error");
-        }
-      }
-
-      document.getElementById("donateStripe").addEventListener("click", () => handleDonation("Stripe"));
-      document.getElementById("donatePayPal").addEventListener("click", () => handleDonation("PayPal"));
-    });
-  </script>
+  <script defer src="/javascript/donate.js"></script>
 </body>
 </html>

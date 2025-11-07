@@ -1,85 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Goodies | Admin Panel</title>
-<!-- CSS -->
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/animations.css">
-<link rel="stylesheet" href="css/utilities.css">
-  <link rel="stylesheet" href="css/header.css" />
-  <link rel="stylesheet" href="css/footer.css" />
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Goodies</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/css/production.css">
 </head>
 
 <body>
   <div class="page-wrapper">
     <header class="site-header container">
-      <a href="/" class="logo"><img src="/assets/logo.png" alt="Goodies Logo" /></a>
-      <h1>Admin Control Panel</h1>
+      <div class="logo">
+        <a href="/"><img src="/assets/logo.png" alt="Goodies" width="120" height="40"></a>
+      </div>
+      <h1>Admin Dashboard</h1>
     </header>
 
-    <main class="container admin-dashboard fade-in">
-      <section class="card">
-        <h2>Maintenance Mode</h2>
-        <p>Toggle maintenance mode across the site.</p>
-        <button id="toggleMaintenance" class="cta-btn">Enable Maintenance Mode</button>
-        <p id="maintenanceMsg"></p>
-      </section>
-
-      <section class="card">
-        <h2>Platform Metrics</h2>
-        <div id="metrics">
-          <p>Loading metrics...</p>
+    <main class="container section-padding">
+      <!-- Platform Metrics -->
+      <section class="admin-section card">
+        <h2>📊 Platform Statistics</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-value" id="totalUsers">-</div>
+            <div class="stat-label">Total Users</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-value" id="totalCampaigns">-</div>
+            <div class="stat-label">Total Campaigns</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💰</div>
+            <div class="stat-value" id="totalDonations">-</div>
+            <div class="stat-label">Total Raised</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-value" id="activeCampaigns">-</div>
+            <div class="stat-label">Active Campaigns</div>
+          </div>
         </div>
       </section>
 
-      <section class="card">
-        <h2>User Management</h2>
-        <p>Feature coming soon — manage users and campaigns here.</p>
+      <!-- Maintenance Mode -->
+      <section class="admin-section card">
+        <h2>🛠️ Maintenance Mode</h2>
+        <p>Toggle site-wide maintenance mode for updates.</p>
+        <div id="maintenanceStatus" class="status-indicator"></div>
+        <div class="button-group">
+          <button id="enableMaintenance" class="cta-btn" disabled>
+            <span class="btn-text">Enable Maintenance</span>
+            <span class="btn-loader hidden"></span>
+          </button>
+          <button id="disableMaintenance" class="cta-btn secondary" disabled>
+            <span class="btn-text">Disable Maintenance</span>
+            <span class="btn-loader hidden"></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Recent Activity -->
+      <section class="admin-section card">
+        <h2>📈 Recent Activity</h2>
+        <div id="recentActivity">Loading...</div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Goodies Admin © 2025</p>
+      <p>&copy; 2025 Goodies Admin</p>
     </footer>
   </div>
 
-  <script>
-    const adminKey = prompt("Enter admin key:");
-    const msg = document.getElementById("maintenanceMsg");
-    const button = document.getElementById("toggleMaintenance");
-
-    async function updateMetrics() {
-      const res = await fetch("/api/admin/metrics", { headers: { "x-admin-key": adminKey } });
-      const data = await res.json();
-      document.getElementById("metrics").innerHTML = `
-        <p><strong>Total Users:</strong> ${data.users}</p>
-        <p><strong>Total Campaigns:</strong> ${data.campaigns}</p>
-        <p><strong>Total Donations:</strong> $${data.totalDonations}</p>
-      `;
-    }
-
-    button.addEventListener("click", async () => {
-      const res = await fetch("/api/admin/maintenance", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-admin-key": adminKey,
-        },
-      });
-      const data = await res.json();
-      msg.textContent = data.message;
-      button.textContent = data.active ? "Disable Maintenance Mode" : "Enable Maintenance Mode";
-    });
-
-    updateMetrics();
-  </script>
+  <script defer src="/javascript/production.js"></script>
+  <script defer src="/javascript/admin.js"></script>
 </body>
 </html>

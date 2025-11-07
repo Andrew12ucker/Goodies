@@ -1,15 +1,12 @@
-// /server/routes/donations.js
-const router = require("express").Router();
-const { protect } = require("../middleware/authMiddleware");
-const donationController = require("../controllers/donationController");
+// server/routes/donations.js
+const express = require('express');
+const router = express.Router();
+const { createDonation, getDonations } = require('../controllers/donationController');
 
-// Stripe session
-router.post("/stripe/session", protect, donationController.createStripeSession);
+// Create new donation
+router.post('/', createDonation);
 
-// PayPal order
-router.post("/paypal/order", protect, donationController.createPaypalOrder);
-
-// Current user's donations
-router.get("/me", protect, donationController.myDonations);
+// Get all donations (optional for admin/dashboard)
+router.get('/', getDonations);
 
 module.exports = router;

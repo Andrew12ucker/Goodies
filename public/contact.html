@@ -1,71 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us | Goodies</title>
-<!-- CSS -->
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/animations.css">
-<link rel="stylesheet" href="css/utilities.css">
-  <link rel="stylesheet" href="css/header.css" />
-  <link rel="stylesheet" href="css/footer.css" />
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- SEO & Meta -->
+  <meta name="description" content="Get in touch with the Goodies team. We're here to help with your campaigns and questions.">
+  <meta name="keywords" content="contact goodies, support, help, customer service">
+  
+  <!-- Security -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
+    style-src 'self' https://fonts.googleapis.com;
+    img-src 'self' data: https:;
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self';
+    frame-src https://www.google.com/recaptcha/;
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/production.css">
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div class="page-wrapper">
-    <header class="site-header container">
-      <a href="/" class="logo"><img src="/assets/logo.png" alt="Goodies Logo" /></a>
+    
+    <!-- Header -->
+    <header class="site-header container" role="banner">
+      <div class="logo">
+        <a href="/" aria-label="Goodies Homepage">
+          <img src="/assets/logo.png" alt="Goodies Logo" width="120" height="40">
+        </a>
+      </div>
+
+      <nav id="mainNav" class="main-nav desktop-only" role="navigation" aria-label="Main navigation">
+        
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Discover <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/campaigns">Campaigns</a></li>
+            <li><a class="dropdown-item" href="/directory">Businesses</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Fundraise <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/donate">Donate</a></li>
+            <li><a class="dropdown-item" href="/create">Start a Campaign</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            About <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/about">Our Mission</a></li>
+            <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <button class="header-icon-btn" data-toggle-search aria-label="Search" title="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <a class="header-icon-btn" href="/login" aria-label="Account" title="Account">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="mainNav" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <div class="header-search" role="search">
+        <input type="search" placeholder="Search campaigns..." aria-label="Search site">
+      </div>
     </header>
 
-    <main class="contact-section container fade-in">
+    <!-- Hero -->
+    <section class="hero small-hero">
       <h1>Contact Goodies Support</h1>
-      <p>We’d love to hear from you! Fill out the form below and we’ll respond within 24 hours.</p>
+      <p>We'd love to hear from you! Fill out the form below and we'll respond within 24 hours.</p>
+    </section>
 
-      <form id="contactForm" class="card">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required>
+    <!-- Contact Section -->
+    <section class="container section-padding contact-section">
+      <div class="contact-layout">
+        
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <h2>Get in Touch</h2>
+          <p>Have questions about campaigns, donations, or our platform? We're here to help!</p>
+          
+          <div class="contact-methods">
+            <div class="contact-method">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <div>
+                <h3>Email</h3>
+                <a href="mailto:support@goodies.com">support@goodies.com</a>
+              </div>
+            </div>
 
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required>
+            <div class="contact-method">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <div>
+                <h3>Phone</h3>
+                <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                <small>Mon-Fri, 9am-5pm EST</small>
+              </div>
+            </div>
 
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="6" required></textarea>
+            <div class="contact-method">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <div>
+                <h3>Office</h3>
+                <address>
+                  123 Community Street<br>
+                  Albuquerque, NM 87101<br>
+                  United States
+                </address>
+              </div>
+            </div>
+          </div>
 
-        <button type="submit" class="cta-btn">Send Message</button>
-        <p id="contactMsg" class="small"></p>
-      </form>
-    </main>
+          <!-- FAQ Quick Links -->
+          <div class="quick-links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="/faq">Frequently Asked Questions</a></li>
+              <li><a href="/help">Help Center</a></li>
+              <li><a href="/terms">Terms of Service</a></li>
+              <li><a href="/privacy">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
 
-    <footer class="site-footer">
-      <p>Goodies ® — Building through community.</p>
+        <!-- Contact Form -->
+        <div class="contact-form-wrapper">
+          <form id="contactForm" class="contact-form card" novalidate>
+            <h2>Send Us a Message</h2>
+            
+            <div class="form-group">
+              <label for="name">Full Name <span class="required">*</span></label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                required 
+                aria-required="true"
+                aria-describedby="name-error"
+                autocomplete="name"
+                placeholder="John Doe"
+                maxlength="100"
+              >
+              <span id="name-error" class="error-message" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required 
+                aria-required="true"
+                aria-describedby="email-error"
+                autocomplete="email"
+                placeholder="john@example.com"
+                maxlength="255"
+              >
+              <span id="email-error" class="error-message" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject <span class="required">*</span></label>
+              <select 
+                id="subject" 
+                name="subject" 
+                required 
+                aria-required="true"
+                aria-describedby="subject-error"
+              >
+                <option value="">Select a topic</option>
+                <option value="campaign">Campaign Support</option>
+                <option value="donation">Donation Questions</option>
+                <option value="technical">Technical Issues</option>
+                <option value="account">Account Management</option>
+                <option value="partnership">Partnership Inquiry</option>
+                <option value="other">Other</option>
+              </select>
+              <span id="subject-error" class="error-message" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message <span class="required">*</span></label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="6" 
+                required 
+                aria-required="true"
+                aria-describedby="message-help message-error"
+                placeholder="Tell us how we can help..."
+                maxlength="2000"
+              ></textarea>
+              <small id="message-help" class="form-help">
+                <span id="messageCharCount">0</span> / 2000 characters
+              </small>
+              <span id="message-error" class="error-message" role="alert"></span>
+            </div>
+
+            <!-- reCAPTCHA placeholder -->
+            <div id="recaptcha-container" class="recaptcha-container"></div>
+
+            <button type="submit" class="cta-btn" id="submitBtn">
+              <span class="btn-text">Send Message</span>
+              <span class="btn-loader hidden" aria-hidden="true"></span>
+            </button>
+            
+            <div id="contactMsg" class="form-feedback" role="status" aria-live="polite"></div>
+          </form>
+
+          <!-- Success Message -->
+          <div id="successMessage" class="success-card card hidden" role="alert">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <h3>Message Sent Successfully!</h3>
+            <p>Thank you for contacting us. We'll get back to you within 24 hours.</p>
+            <button class="cta-btn secondary" onclick="location.reload()">Send Another Message</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-content container">
+        <div class="footer-brand">
+          <img src="/assets/logo.png" alt="Goodies Logo" width="100" height="33">
+          <p>Goodies® – Building through community.</p>
+        </div>
+        
+        <div class="footer-social" aria-label="Social media links">
+          <a href="https://twitter.com/goodies" class="social-btn" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.86 1.09A4.5 4.5 0 0 0 12 4.47v.56A12.94 12.94 0 0 1 3 1s-4 9 5 13a13 13 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+            </svg>
+          </a>
+          <a href="https://linkedin.com/company/goodies" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11.75 19h-2.5v-8.98h2.5v8.98zm-1.25-10.24c-.797 0-1.29-.53-1.29-1.19 0-.67.51-1.19 1.32-1.19.81 0 1.29.52 1.31 1.19 0 .66-.5 1.19-1.34 1.19zm12 10.24h-2.5v-4.8c0-1.21-.43-2.04-1.5-2.04-.82 0-1.31.55-1.53 1.08-.08.2-.1.48-.1.76v4.99h-2.5s.03-8.1 0-8.98h2.5v1.27c.33-.51.92-1.23 2.24-1.23 1.64 0 2.87 1.07 2.87 3.37v5.57z"/>
+            </svg>
+          </a>
+          <a href="https://facebook.com/goodies" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8.9v-2.9h1.6V9.4c0-1.6.95-2.5 2.4-2.5.7 0 1.4.13 1.4.13v1.6h-.82c-.8 0-1.05.5-1.05 1v1.2h1.78l-.28 2.9h-1.5v7A10 10 0 0 0 22 12z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom container">
+        <p>&copy; 2025 Goodies. All rights reserved.</p>
+      </div>
     </footer>
   </div>
 
-  <script>
-    document.getElementById("contactForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const form = e.target;
-      const msg = document.getElementById("contactMsg");
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name.value,
-          email: form.email.value,
-          message: form.message.value,
-        }),
-      });
-      const data = await res.json();
-      msg.textContent = res.ok ? "✅ Message sent successfully!" : `❌ ${data.message}`;
-      if (res.ok) form.reset();
-    });
-  </script>
+  <!-- Scripts -->
+  <script defer src="/javascript/production.js"></script>
+  <script defer src="/javascript/contact.js"></script>
 </body>
 </html>

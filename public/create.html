@@ -1,29 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Goodies | Create a Campaign</title>
-  <meta name="description" content="Start your campaign on Goodies — share your mission and inspire your community." />
-  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-
-  <!-- Unified Production CSS -->
-  <link rel="stylesheet" href="/css/production.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Campaign | Goodies</title>
+  
+  <!-- SEO & Meta -->
+  <meta name="description" content="Start your campaign on Goodies – share your mission and inspire your community.">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Security -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self';
+    style-src 'self' https://fonts.googleapis.com;
+    img-src 'self' data: blob:;
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self';
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/production.css">
+    <link rel="stylesheet" href="/css/create.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div class="page-wrapper">
+    
     <!-- Header -->
-    <header class="site-header container">
-      <div class="logo"><a href="/"><img src="/assets/logo.png" alt="Goodies Logo" /></a></div>
-      <nav id="mainNav" class="main-nav desktop-only">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/discover" class="nav-link">Discover</a>
-        <a href="/fundraise" class="nav-link active">Fundraise</a>
-        <a href="/directory" class="nav-link">Directory</a>
-        <a href="/campaigns" class="nav-link">Campaigns</a>
-        <a href="/about" class="nav-link">About</a>
+    <header class="site-header container" role="banner">
+      <div class="logo">
+        <a href="/" aria-label="Goodies Homepage">
+          <img src="/assets/logo.png" alt="Goodies Logo" width="120" height="40">
+        </a>
+      </div>
+
+      <nav id="mainNav" class="main-nav desktop-only" role="navigation" aria-label="Main navigation">
+        
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Discover <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/campaigns">Campaigns</a></li>
+            <li><a class="dropdown-item" href="/directory">Businesses</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Fundraise <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/donate">Donate</a></li>
+            <li><a class="dropdown-item" href="/create">Start a Campaign</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            About <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/about">Our Mission</a></li>
+            <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
+          </ul>
+        </div>
       </nav>
+
+      <div class="header-actions">
+        <button class="header-icon-btn" data-toggle-search aria-label="Search" title="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <a class="header-icon-btn" href="/login" aria-label="Account" title="Account">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="mainNav" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <div class="header-search" role="search">
+        <input type="search" placeholder="Search campaigns..." aria-label="Search site">
+      </div>
     </header>
 
     <!-- Hero -->
@@ -32,128 +112,276 @@
       <p>Tell your story. Inspire generosity. Change lives.</p>
     </section>
 
+    <!-- Progress Steps -->
+    <section class="container" aria-label="Campaign creation progress">
+      <div class="progress-steps">
+        <div class="progress-bar-container" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" aria-label="Step 1 of 4">
+          <div class="progress-bar-fill" style="width: 25%"></div>
+        </div>
+        <div class="step active" data-step="1">
+          <div class="step-number" aria-hidden="true">1</div>
+          <div class="step-label">Basic Info</div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-number" aria-hidden="true">2</div>
+          <div class="step-label">Details</div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-number" aria-hidden="true">3</div>
+          <div class="step-label">Media</div>
+        </div>
+        <div class="step" data-step="4">
+          <div class="step-number" aria-hidden="true">4</div>
+          <div class="step-label">Review</div>
+        </div>
+      </div>
+    </section>
+
     <!-- Create Campaign Form -->
     <section class="container section-padding">
-      <form id="createCampaignForm" class="campaign-form" enctype="multipart/form-data">
-        <label for="title">Campaign Title</label>
-        <input type="text" id="title" name="title" placeholder="E.g. Build a Community Garden" required />
+      <form id="createCampaignForm" class="campaign-form" enctype="multipart/form-data" novalidate>
+        
+        <!-- Step 1: Basic Info -->
+        <div class="form-step active" data-step="1">
+          <h2>Basic Information</h2>
+          
+          <div class="form-group">
+            <label for="title">Campaign Title <span class="required">*</span></label>
+            <input 
+              type="text" 
+              id="title" 
+              name="title" 
+              placeholder="E.g., Build a Community Garden" 
+              required 
+              aria-required="true"
+              aria-describedby="title-help title-error"
+              maxlength="100"
+              autocomplete="off"
+            >
+            <small id="title-help" class="form-help">Keep it clear and compelling (max 100 characters)</small>
+            <span id="title-error" class="error-message" role="alert"></span>
+          </div>
 
-        <label for="description">Description</label>
-        <textarea id="description" name="description" rows="5" placeholder="Describe your mission and impact..." required></textarea>
+          <div class="form-group">
+            <label for="category">Category <span class="required">*</span></label>
+            <select 
+              id="category" 
+              name="category" 
+              required 
+              aria-required="true"
+              aria-describedby="category-error"
+            >
+              <option value="">Select a category</option>
+              <option value="community">Community</option>
+              <option value="education">Education</option>
+              <option value="health">Health</option>
+              <option value="arts">Arts &amp; Culture</option>
+              <option value="environment">Environment</option>
+              <option value="technology">Technology</option>
+              <option value="business">Small Business</option>
+              <option value="other">Other</option>
+            </select>
+            <span id="category-error" class="error-message" role="alert"></span>
+          </div>
 
-        <label for="goal">Funding Goal (USD)</label>
-        <input type="number" id="goal" name="goal" placeholder="5000" min="1" required />
-
-        <label for="deadline">Deadline</label>
-        <input type="date" id="deadline" name="deadline" required />
-
-        <!-- Image Upload -->
-        <label for="imageUploadInput">Campaign Image</label>
-        <div class="image-upload" id="uploadZone">
-          <p>Click or drag an image to upload</p>
-          <input type="file" id="imageUploadInput" accept="image/*" />
+          <div class="button-group">
+            <button type="button" class="cta-btn" data-next-step>Next Step</button>
+          </div>
         </div>
-        <div class="image-preview" id="imagePreview"></div>
 
-        <button type="submit" class="cta-btn">Create Campaign</button>
-        <p id="formFeedback" class="form-feedback"></p>
+        <!-- Step 2: Details -->
+        <div class="form-step" data-step="2">
+          <h2>Campaign Details</h2>
+          
+          <div class="form-group">
+            <label for="description">Campaign Description <span class="required">*</span></label>
+            <textarea 
+              id="description" 
+              name="description" 
+              placeholder="Tell your story. What inspired this campaign? How will the funds be used? Why should people support you?" 
+              required 
+              aria-required="true"
+              aria-describedby="description-help description-error"
+              rows="10"
+              maxlength="5000"
+            ></textarea>
+            <small id="description-help" class="form-help">
+              <span id="charCount">0</span> / 5000 characters
+            </small>
+            <span id="description-error" class="error-message" role="alert"></span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="goal">Funding Goal (USD) <span class="required">*</span></label>
+              <div class="input-prefix">
+                <span class="prefix" aria-hidden="true">$</span>
+                <input 
+                  type="number" 
+                  id="goal" 
+                  name="goal" 
+                  placeholder="5000" 
+                  min="100" 
+                  max="1000000"
+                  step="1"
+                  required 
+                  aria-required="true"
+                  aria-describedby="goal-help goal-error"
+                  inputmode="decimal"
+                >
+              </div>
+              <small id="goal-help" class="form-help">Minimum $100, Maximum $1,000,000</small>
+              <span id="goal-error" class="error-message" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="deadline">Campaign Deadline <span class="required">*</span></label>
+              <input 
+                type="date" 
+                id="deadline" 
+                name="deadline" 
+                required 
+                aria-required="true"
+                aria-describedby="deadline-help deadline-error"
+              >
+              <small id="deadline-help" class="form-help">Select an end date for your campaign</small>
+              <span id="deadline-error" class="error-message" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button type="button" class="cta-btn secondary" data-prev-step>Previous</button>
+            <button type="button" class="cta-btn" data-next-step>Next Step</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Media -->
+        <div class="form-step" data-step="3">
+          <h2>Campaign Media</h2>
+          
+          <div class="form-group">
+            <label for="imageUploadInput">Campaign Image <span class="required">*</span></label>
+            <div 
+              class="image-upload" 
+              id="uploadZone" 
+              role="button" 
+              tabindex="0"
+              aria-label="Click or drag to upload campaign image"
+            >
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <p><strong>Click to upload</strong> or drag and drop</p>
+              <small>PNG, JPG, WEBP up to 5MB (Min 800x600px recommended)</small>
+              <input 
+                type="file" 
+                id="imageUploadInput" 
+                name="image"
+                accept="image/png,image/jpeg,image/jpg,image/webp" 
+                required
+                aria-required="true"
+                aria-describedby="image-error"
+              >
+            </div>
+            <span id="image-error" class="error-message" role="alert"></span>
+          </div>
+          
+          <div class="image-preview hidden" id="imagePreview" role="img" aria-label="Campaign image preview">
+            <button type="button" class="remove-image" aria-label="Remove image">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          <div class="button-group">
+            <button type="button" class="cta-btn secondary" data-prev-step>Previous</button>
+            <button type="button" class="cta-btn" data-next-step>Next Step</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Review & Submit -->
+        <div class="form-step" data-step="4">
+          <h2>Review Your Campaign</h2>
+          
+          <div class="campaign-preview card">
+            <div id="previewImage" class="preview-image" aria-label="Campaign image preview"></div>
+            <div class="preview-content">
+              <h3 id="previewTitle">Campaign Title</h3>
+              <p class="preview-category" id="previewCategory">Category</p>
+              <p id="previewDescription">Description will appear here...</p>
+              <div class="preview-stats">
+                <div class="stat">
+                  <strong>Goal:</strong>
+                  <span id="previewGoal">$0</span>
+                </div>
+                <div class="stat">
+                  <strong>Deadline:</strong>
+                  <span id="previewDeadline">Not set</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="termsAccept" required aria-required="true">
+              <span>I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a></span>
+            </label>
+            <span id="terms-error" class="error-message" role="alert"></span>
+          </div>
+
+          <div class="button-group">
+            <button type="button" class="cta-btn secondary" data-prev-step>Previous</button>
+            <button type="submit" class="cta-btn" id="submitBtn">
+              <span class="btn-text">Create Campaign</span>
+              <span class="btn-loader hidden" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+
+        <div id="formFeedback" class="form-feedback" role="status" aria-live="polite"></div>
       </form>
     </section>
 
     <!-- Footer -->
-    <footer class="site-footer">
-      <p>Goodies ® — Building through community.</p>
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-content container">
+        <div class="footer-brand">
+          <img src="/assets/logo.png" alt="Goodies Logo" width="100" height="33">
+          <p>Goodies® – Building through community.</p>
+        </div>
+        
+        <div class="footer-social" aria-label="Social media links">
+          <a href="https://twitter.com/goodies" class="social-btn" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.86 1.09A4.5 4.5 0 0 0 12 4.47v.56A12.94 12.94 0 0 1 3 1s-4 9 5 13a13 13 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+            </svg>
+          </a>
+          <a href="https://linkedin.com/company/goodies" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11.75 19h-2.5v-8.98h2.5v8.98zm-1.25-10.24c-.797 0-1.29-.53-1.29-1.19 0-.67.51-1.19 1.32-1.19.81 0 1.29.52 1.31 1.19 0 .66-.5 1.19-1.34 1.19zm12 10.24h-2.5v-4.8c0-1.21-.43-2.04-1.5-2.04-.82 0-1.31.55-1.53 1.08-.08.2-.1.48-.1.76v4.99h-2.5s.03-8.1 0-8.98h2.5v1.27c.33-.51.92-1.23 2.24-1.23 1.64 0 2.87 1.07 2.87 3.37v5.57z"/>
+            </svg>
+          </a>
+          <a href="https://facebook.com/goodies" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8.9v-2.9h1.6V9.4c0-1.6.95-2.5 2.4-2.5.7 0 1.4.13 1.4.13v1.6h-.82c-.8 0-1.05.5-1.05 1v1.2h1.78l-.28 2.9h-1.5v7A10 10 0 0 0 22 12z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom container">
+        <p>&copy; 2025 Goodies. All rights reserved.</p>
+      </div>
     </footer>
   </div>
 
-  <!-- Production JS Bundle -->
+  <!-- Scripts -->
   <script defer src="/javascript/production.js"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("createCampaignForm");
-      const feedback = document.getElementById("formFeedback");
-      const imageInput = document.getElementById("imageUploadInput");
-      const preview = document.getElementById("imagePreview");
-      const uploadZone = document.getElementById("uploadZone");
-
-      // ✅ Live Image Preview
-      imageInput.addEventListener("change", () => {
-        const file = imageInput.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = e => {
-          preview.innerHTML = `<img src="${e.target.result}" alt="Campaign Preview" />`;
-        };
-        reader.readAsDataURL(file);
-      });
-
-      // ✅ Drag-and-Drop Support
-      ["dragenter", "dragover"].forEach(evt => {
-        uploadZone.addEventListener(evt, e => {
-          e.preventDefault();
-          e.stopPropagation();
-          uploadZone.style.background = "rgba(212,175,55,0.1)";
-        });
-      });
-      ["dragleave", "drop"].forEach(evt => {
-        uploadZone.addEventListener(evt, e => {
-          e.preventDefault();
-          e.stopPropagation();
-          uploadZone.style.background = "transparent";
-        });
-      });
-      uploadZone.addEventListener("drop", e => {
-        const file = e.dataTransfer.files[0];
-        if (!file) return;
-        imageInput.files = e.dataTransfer.files;
-        const reader = new FileReader();
-        reader.onload = ev => {
-          preview.innerHTML = `<img src="${ev.target.result}" alt="Campaign Preview" />`;
-        };
-        reader.readAsDataURL(file);
-      });
-
-      // ✅ Submit Logic
-      form.addEventListener("submit", async e => {
-        e.preventDefault();
-        const token = localStorage.getItem("goodies_token");
-        if (!token) {
-          feedback.textContent = "Please log in to create a campaign.";
-          feedback.classList.add("error");
-          return;
-        }
-
-        const body = new FormData();
-        body.append("title", form.title.value.trim());
-        body.append("description", form.description.value.trim());
-        body.append("goal", form.goal.value);
-        body.append("deadline", form.deadline.value);
-        if (imageInput.files[0]) body.append("image", imageInput.files[0]);
-
-        feedback.textContent = "Creating your campaign...";
-        try {
-          const res = await fetch("/api/campaigns", {
-            method: "POST",
-            headers: { Authorization: `Bearer ${token}` },
-            body
-          });
-          const data = await res.json();
-          if (res.ok) {
-            feedback.textContent = "✅ Campaign created successfully!";
-            feedback.classList.add("success");
-            form.reset();
-            preview.innerHTML = "";
-          } else {
-            feedback.textContent = data.message || "❌ Failed to create campaign.";
-            feedback.classList.add("error");
-          }
-        } catch {
-          feedback.textContent = "Server error. Please try again later.";
-          feedback.classList.add("error");
-        }
-      });
-    });
-  </script>
+  <script defer src="/javascript/create.js"></script>
 </body>
 </html>

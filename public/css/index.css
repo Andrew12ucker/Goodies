@@ -1,221 +1,64 @@
-/* Page-specific index styles only — resets and body styles live in base.css */
+/* === INDEX PAGE CUSTOM === */
 
-
-/* Header */
-.site-header {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  padding: 20px 60px;
-  background: rgba(10, 10, 10, 0.9);
-  border-bottom: 1px solid #222;
-  position: relative;
-  top: 0;
-  z-index: 1000;
-}
-
-.site-header .logo img {
-  height: 10px;
-}
-
-.main-nav a {
-  color: #f5f5f5;
-  margin-left: 30px;
-  text-decoration: none;
-  font-size: 16px;
-  transition: color 0.3s;
-}
-
-.main-nav a:hover {
-  color: #b9a46f; /* gold accent */
-}
-
-/* Hero Section */
 .hero {
-  height: 100vh;
-  background: url("../assets/hero-bg.jpg") center/cover no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  background: linear-gradient(to right, #d4af37, #e0c469);
+  color: #fff;
   text-align: center;
-  color: #f5f5f5;
+  padding: 6rem 2rem;
+  overflow: hidden;
 }
 
 .hero h1 {
-  font-size: 64px;
-  font-weight: 300;
-  margin-bottom: 20px;
-  color: #f5f5f5;
-}
-
-.hero h2 {
-  font-size: 64px;
-  font-weight: 300;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #f5f5f5;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .hero p {
-  font-size: 20px;
-  max-width: 700px;
-  margin-bottom: 40px;
-  color: #f5f5f5;
-
+  font-size: 1.25rem;
+  opacity: 0.95;
 }
 
-.cta-btn {
-  padding: 15px 40px;
-  background-color: #b9a46f;
-  color: #fff;
-  font-size: 18px;
-  text-decoration: none;
-  border-radius: 30px;
-  transition: background 0.3s;
+.hero-cta {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
-.cta-btn:hover {
-  background-color: #d4c18a;
+.hero video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4);
+  z-index: 0;
 }
 
-/* Featured Campaigns */
-.featured {
-  padding: 80px 60px;
-  background: #111;
-}
-
-.featured h2 {
-  font-size: 36px;
-  text-align: center;
-  margin-bottom: 40px;
+.hero-content {
+  position: relative;
+  z-index: 1;
 }
 
 .campaign-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
 }
 
 .campaign-card {
-  background: #1a1a1a;
-  padding: 30px;
-  border-radius: 15px;
-  transition: transform 0.3s;
+  background: var(--lux-light);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .campaign-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
 }
-
-/* Footer */
-.site-footer {
-  text-align: center;
-  padding: 30px;
-  background: #0a0a0a;
-  border-top: 1px solid #222;
-  font-size: 14px;
-}
-
-
-  <!-- Inline hero styles specific to this page (kept tiny) -->
-  <style>
-    .hero {
-      position: relative;
-      min-height: clamp(60vh, 78vh, 92vh);
-      display: grid;
-      place-items: center;
-      overflow: clip;
-      isolation: isolate;
-      background: radial-gradient(1200px 600px at 70% 0%, rgba(255,215,0,.08), transparent 50%),
-                  linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
-    }
-    .hero__video {
-      position: absolute;
-      inset: -2% -2% -2% -2%;
-      width: 104%;
-      height: 104%;
-      object-fit: cover;
-      z-index: -1;
-      filter: saturate(1.1) contrast(1.05) brightness(.9);
-      transform: translateZ(0);
-      will-change: transform;
-    }
-    .hero__scrim {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(70% 60% at 50% 40%, rgba(0,0,0,.15), rgba(0,0,0,.45)),
-                  linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.65));
-      z-index: 0;
-      pointer-events: none;
-    }
-    .hero-content {
-      width: min(1100px, 92vw);
-      margin-inline: auto;
-      padding: clamp(1rem, 2vw, 1.5rem);
-      text-align: center;
-      z-index: 1;
-      animation: fadeUp .9s ease-out both .1s;
-    }
-    .hero h1 {
-      font-family: "Cormorant Garamond", serif;
-      font-weight: 600;
-      font-size: clamp(2.2rem, 4.8vw, 4.2rem);
-      line-height: 1.1;
-      margin: 0 0 .5rem;
-      letter-spacing: .02em;
-      text-shadow: 0 6px 24px rgba(0,0,0,.45);
-    }
-    .hero p {
-      color: var(--lux-muted);
-      font-size: clamp(1rem, 1.4vw, 1.25rem);
-      margin: .25rem auto 1.75rem;
-      max-width: 64ch;
-      text-shadow: 0 4px 16px rgba(0,0,0,.4);
-    }
-    .hero-cta {
-      display: inline-flex;
-      gap: .75rem;
-    }
-    .cta-outline {
-      background: transparent;
-      border: 1.5px solid var(--lux-gold);
-      color: var(--lux-gold);
-    }
-    .cta-outline:hover {
-      background: rgba(255,215,0,.08);
-      transform: translateY(-1px);
-    }
-
-    /* Scroll cue */
-    .scroll-cue {
-      position: absolute;
-      bottom: clamp(10px, 3vh, 24px);
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--lux-muted);
-      font-size: .85rem;
-      opacity: .85;
-      letter-spacing: .08em;
-      display: grid;
-      place-items: center;
-      gap: .35rem;
-      user-select: none;
-    }
-    .scroll-cue svg { animation: bob 1.6s ease-in-out infinite; opacity: .8; }
-    @keyframes bob { 50% { transform: translateY(4px); } }
-
-    /* Reveal featured cards softly */
-    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
-    .reveal.is-visible { opacity: 1; transform: translateY(0); }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero__video { animation: none !important; }
-      .reveal { transition: none !important; opacity: 1 !important; transform: none !important; }
-    }
-  </style>

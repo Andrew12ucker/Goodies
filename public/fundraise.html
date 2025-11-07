@@ -1,164 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Goodies | Fundraise</title>
-  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-
-  <!-- Meta & Security -->
-  <meta name="description" content="Start a crowdfunding campaign on Goodies and inspire your community to take action." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start Fundraising | Goodies</title>
+  
+  <!-- SEO & Meta -->
+  <meta name="description" content="Start your crowdfunding campaign on Goodies and inspire your community to take action.">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Security -->
   <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self' https:;
-    script-src 'self' 'unsafe-inline' https://js.stripe.com;
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    img-src 'self' data:;
-    font-src https://fonts.gstatic.com https://fonts.googleapis.com;
-    connect-src 'self' https://api.stripe.com;
-  " />
-
+    default-src 'self';
+    script-src 'self';
+    style-src 'self' https://fonts.googleapis.com;
+    img-src 'self' data: https:;
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self';
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  
   <!-- CSS -->
-    <link rel="stylesheet" href="/css/production.css">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/production.css">
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div class="page-wrapper">
-<!-- Header -->
-<header class="site-header container" role="banner">
-  <div class="logo">
-    <a href="/"><img src="/assets/logo.png" alt="Goodies Logo" /></a>
-  </div>
+    
+    <!-- Header -->
+    <header class="site-header container" role="banner">
+      <div class="logo">
+        <a href="/" aria-label="Goodies Homepage">
+          <img src="/assets/logo.png" alt="Goodies Logo" width="120" height="40">
+        </a>
+      </div>
 
-  <nav id="mainNav" class="main-nav desktop-only" role="navigation" aria-label="Main navigation">
-    <a class="nav-link" href="/"></a>
+      <nav id="mainNav" class="main-nav desktop-only" role="navigation" aria-label="Main navigation">
+        
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Discover <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/campaigns">Campaigns</a></li>
+            <li><a class="dropdown-item" href="/directory">Businesses</a></li>
+          </ul>
+        </div>
 
-    <!-- Discover Dropdown -->
-    <div class="nav-item dropdown">
-      <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-        Discover <span class="dropdown-arrow">▾</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a class="dropdown-item" href="/campaigns">Campaigns</a></li>
-        <li><a class="dropdown-item" href="/directory">Businesses</a></li>
-      </ul>
-    </div>
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Fundraise <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/donate">Donate</a></li>
+            <li><a class="dropdown-item" href="/create">Start a Campaign</a></li>
+          </ul>
+        </div>
 
-    <!-- Fundraise Dropdown -->
-    <div class="nav-item dropdown">
-      <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-        Fundraise <span class="dropdown-arrow">▾</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a class="dropdown-item" href="/donate">Donate</a></li>
-        <li><a class="dropdown-item" href="/dashboard">Start a Goodies</a></li>
-      </ul>
-    </div>
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            About <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/about">Our Mission</a></li>
+            <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
 
-    <!-- About Dropdown -->
-    <div class="nav-item dropdown">
-      <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-        About <span class="dropdown-arrow">▾</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a class="dropdown-item" href="/about">Our Mission</a></li>
-        <li><a class="dropdown-item" href="/team">Meet the Team</a></li>
-        <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
-      </ul>
-    </div>
-  </nav>
+      <div class="header-actions">
+        <button class="header-icon-btn" data-toggle-search aria-label="Search" title="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
 
-  <div class="header-actions">
-    <button class="header-icon-btn" data-toggle-search aria-label="Search">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="11" cy="11" r="7"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-    </button>
+        <a class="header-icon-btn" href="/login" aria-label="Account" title="Account">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
 
-    <a class="header-icon-btn" href="/login" aria-label="Account">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-        <circle cx="12" cy="7" r="4"></circle>
-      </svg>
-    </a>
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="mainNav" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
 
-    <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="mainNav" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-
-  <div class="header-search">
-    <input type="search" placeholder="Search" aria-label="Search site" />
-  </div>
-</header>
+      <div class="header-search" role="search">
+        <input type="search" placeholder="Search campaigns..." aria-label="Search site">
+      </div>
+    </header>
 
     <!-- Hero -->
-    <section class="hero">
+    <section class="hero small-hero">
       <h1>Start Your Fundraiser</h1>
       <p>Bring your vision to life. Inspire your community to make change together.</p>
     </section>
 
     <!-- Campaign Form -->
     <section class="container section-padding">
-      <form id="createCampaignForm" class="campaign-form" aria-describedby="formHelp">
+      <form id="createCampaignForm" class="campaign-form" aria-describedby="formHelp" novalidate>
         <p id="formHelp" class="form-help">All fields are required. Keep your description clear and inspiring.</p>
 
-        <label for="title">Campaign Title</label>
-        <input id="title" name="title" type="text" placeholder="e.g., Clean Water for All" required />
+        <div class="form-group">
+          <label for="title">Campaign Title <span class="required">*</span></label>
+          <input 
+            id="title" 
+            name="title" 
+            type="text" 
+            placeholder="e.g., Clean Water for All" 
+            required 
+            aria-required="true"
+            aria-describedby="title-error"
+            maxlength="100"
+          >
+          <span id="title-error" class="error-message" role="alert"></span>
+        </div>
 
-        <label for="description">Description</label>
-        <textarea id="description" name="description" placeholder="Describe your campaign goals and vision..." required></textarea>
+        <div class="form-group">
+          <label for="description">Description <span class="required">*</span></label>
+          <textarea 
+            id="description" 
+            name="description" 
+            placeholder="Describe your campaign goals and vision..." 
+            required 
+            aria-required="true"
+            aria-describedby="description-help description-error"
+            rows="8"
+            maxlength="5000"
+          ></textarea>
+          <small id="description-help" class="form-help">
+            <span id="charCount">0</span> / 5000 characters
+          </small>
+          <span id="description-error" class="error-message" role="alert"></span>
+        </div>
 
-        <label for="goal">Funding Goal (USD)</label>
-        <input id="goal" name="goal" type="number" placeholder="5000" min="1" required />
+        <div class="form-group">
+          <label for="goal">Funding Goal (USD) <span class="required">*</span></label>
+          <div class="input-prefix">
+            <span class="prefix">$</span>
+            <input 
+              id="goal" 
+              name="goal" 
+              type="number" 
+              placeholder="5000" 
+              min="100" 
+              step="1"
+              required 
+              aria-required="true"
+              aria-describedby="goal-error"
+            >
+          </div>
+          <span id="goal-error" class="error-message" role="alert"></span>
+        </div>
 
-        <label for="deadline">Deadline</label>
-        <input id="deadline" name="deadline" type="date" required />
+        <div class="form-group">
+          <label for="deadline">Deadline <span class="required">*</span></label>
+          <input 
+            id="deadline" 
+            name="deadline" 
+            type="date" 
+            required 
+            aria-required="true"
+            aria-describedby="deadline-error"
+          >
+          <span id="deadline-error" class="error-message" role="alert"></span>
+        </div>
 
-        <button type="submit" class="cta-btn">Launch Campaign</button>
+        <button type="submit" class="cta-btn" id="submitBtn">
+          <span class="btn-text">Launch Campaign</span>
+          <span class="btn-loader hidden" aria-hidden="true"></span>
+        </button>
       </form>
 
       <div id="formFeedback" class="form-feedback" role="status" aria-live="polite"></div>
     </section>
 
     <!-- Footer -->
-    <footer class="site-footer">
-      <p>Goodies ® — Building through community.</p>
-      <div class="footer-social" aria-label="Share on social media">
-        <button class="social-btn" data-share="twitter" aria-label="Share on Twitter" title="Share on Twitter">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.86 1.09A4.5 4.5 0 0 0 12 4.47v.56A12.94 12.94 0 0 1 3 1s-4 9 5 13a13 13 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
-        </button>
-        <button class="social-btn" data-share="linkedin" aria-label="Share on LinkedIn" title="Share on LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11.75 19h-2.5v-8.98h2.5v8.98zm-1.25-10.24c-.797 0-1.29-.53-1.29-1.19 0-.67.51-1.19 1.32-1.19.81 0 1.29.52 1.31 1.19 0 .66-.5 1.19-1.34 1.19zm12 10.24h-2.5v-4.8c0-1.21-.43-2.04-1.5-2.04-.82 0-1.31.55-1.53 1.08-.08.2-.1.48-.1.76v4.99h-2.5s.03-8.1 0-8.98h2.5v1.27c.33-.51.92-1.23 2.24-1.23 1.64 0 2.87 1.07 2.87 3.37v5.57z"/></svg>
-        </button>
-        <button class="social-btn" data-share="facebook" aria-label="Share on Facebook" title="Share on Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8.9v-2.9h1.6V9.4c0-1.6.95-2.5 2.4-2.5.7 0 1.4.13 1.4.13v1.6h-.82c-.8 0-1.05.5-1.05 1v1.2h1.78l-.28 2.9h-1.5v7A10 10 0 0 0 22 12z"/></svg>
-        </button>
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-content container">
+        <div class="footer-brand">
+          <img src="/assets/logo.png" alt="Goodies Logo" width="100" height="33">
+          <p>Goodies® – Building through community.</p>
+        </div>
+        
+        <div class="footer-social" aria-label="Social media links">
+          <a href="https://twitter.com/goodies" class="social-btn" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.86 1.09A4.5 4.5 0 0 0 12 4.47v.56A12.94 12.94 0 0 1 3 1s-4 9 5 13a13 13 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+            </svg>
+          </a>
+          <a href="https://linkedin.com/company/goodies" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11.75 19h-2.5v-8.98h2.5v8.98zm-1.25-10.24c-.797 0-1.29-.53-1.29-1.19 0-.67.51-1.19 1.32-1.19.81 0 1.29.52 1.31 1.19 0 .66-.5 1.19-1.34 1.19zm12 10.24h-2.5v-4.8c0-1.21-.43-2.04-1.5-2.04-.82 0-1.31.55-1.53 1.08-.08.2-.1.48-.1.76v4.99h-2.5s.03-8.1 0-8.98h2.5v1.27c.33-.51.92-1.23 2.24-1.23 1.64 0 2.87 1.07 2.87 3.37v5.57z"/>
+            </svg>
+          </a>
+          <a href="https://facebook.com/goodies" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8.9v-2.9h1.6V9.4c0-1.6.95-2.5 2.4-2.5.7 0 1.4.13 1.4.13v1.6h-.82c-.8 0-1.05.5-1.05 1v1.2h1.78l-.28 2.9h-1.5v7A10 10 0 0 0 22 12z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom container">
+        <p>&copy; 2025 Goodies. All rights reserved.</p>
       </div>
     </footer>
   </div>
 
   <!-- Scripts -->
-    <script defer src="/javascript/production.js"></script>
-
+  <script defer src="/javascript/production.js"></script>
+  
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("createCampaignForm");
       const feedback = document.getElementById("formFeedback");
+      const charCount = document.getElementById("charCount");
+      const description = document.getElementById("description");
+
+      // Character counter
+      if (description && charCount) {
+        description.addEventListener("input", () => {
+          charCount.textContent = description.value.length;
+        });
+      }
+
+      // Set minimum date to today
+      const deadlineInput = document.getElementById("deadline");
+      if (deadlineInput) {
+        const today = new Date().toISOString().split('T')[0];
+        deadlineInput.setAttribute('min', today);
+      }
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        feedback.textContent = "Submitting your campaign...";
-        feedback.classList.remove("error", "success");
+        feedback.textContent = "Creating your campaign...";
+        feedback.className = "form-feedback";
 
-        const token = localStorage.getItem("goodies_token");
+        const token = window.Goodies.storage.get("goodies_token");
         if (!token) {
           feedback.textContent = "You must be logged in to create a campaign.";
-          feedback.classList.add("error");
+          feedback.className = "form-feedback error";
+          setTimeout(() => window.location.href = '/login', 2000);
           return;
         }
 
@@ -169,34 +266,31 @@
           deadline: form.deadline.value
         };
 
+        const submitBtn = document.getElementById("submitBtn");
+        window.Goodies.setButtonLoading(submitBtn, true);
+
         try {
-          const res = await fetch("/api/campaigns", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(campaignData),
-          });
-
-          const data = await res.json();
-          if (res.ok) {
-            feedback.textContent = "✅ Campaign created successfully!";
-            feedback.classList.add("success");
-            form.reset();
-
-            // Optional toast notification
-            if (window.showToast) {
-              showToast("Campaign created successfully!", "success");
-            }
-          } else {
-            feedback.textContent = data.message || "❌ Failed to create campaign.";
-            feedback.classList.add("error");
-          }
+          const data = await window.Goodies.API.post("/campaigns", campaignData);
+          
+          feedback.textContent = "✅ Campaign created successfully!";
+          feedback.className = "form-feedback success";
+          window.Goodies.Toast.success("Campaign created successfully!");
+          
+          form.reset();
+          charCount.textContent = "0";
+          
+          // Redirect to campaign page after 2 seconds
+          setTimeout(() => {
+            window.location.href = `/campaign/${data._id}`;
+          }, 2000);
+          
         } catch (err) {
           console.error("Error creating campaign:", err);
-          feedback.textContent = "Server error. Please try again later.";
-          feedback.classList.add("error");
+          feedback.textContent = err.message || "❌ Failed to create campaign.";
+          feedback.className = "form-feedback error";
+          window.Goodies.Toast.error("Failed to create campaign");
+        } finally {
+          window.Goodies.setButtonLoading(submitBtn, false);
         }
       });
     });

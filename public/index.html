@@ -1,112 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Goodies — Elevate Community Ambition</title>
-  <meta name="description" content="Goodies — Discover and support creators and local projects with elegant crowdfunding." />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goodies – Elevate Community Ambition</title>
+  
+  <!-- SEO & Meta -->
+  <meta name="description" content="Goodies – Discover and support creators and local projects with elegant crowdfunding.">
+  <meta name="keywords" content="crowdfunding, community, fundraising, campaigns, donations">
+  <meta name="author" content="Goodies">
+  
   <!-- Open Graph -->
-  <meta property="og:title" content="Goodies — Elevate Community Ambition" />
-  <meta property="og:description" content="Discover and support creators and local projects with elegant crowdfunding." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="/" />
-  <meta property="og:image" content="/assets/logo.png" />
-
-  <!-- Content Security Policy (allows local video) -->
+  <meta property="og:title" content="Goodies – Elevate Community Ambition">
+  <meta property="og:description" content="Discover and support creators and local projects with elegant crowdfunding.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://goodies.com">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  
+  <!-- Security -->
   <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self' https:;
-    script-src 'self' 'unsafe-inline' https://js.stripe.com https://www.paypal.com;
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    img-src 'self' data:;
-    font-src https://fonts.gstatic.com https://fonts.googleapis.com;
+    default-src 'self';
+    script-src 'self' https://js.stripe.com https://www.paypal.com;
+    style-src 'self' https://fonts.googleapis.com;
+    img-src 'self' data: https:;
+    font-src 'self' https://fonts.gstatic.com;
     connect-src 'self' https://api.stripe.com https://www.paypal.com;
     frame-src https://js.stripe.com https://www.paypal.com;
     media-src 'self';
-  " />
-
-  <!-- CSS (modular) -->
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  
+  <!-- CSS -->
   <link rel="stylesheet" href="/css/production.css">
-
+    <link rel="stylesheet" href="/css/index.css">
+  
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="/assets/hero-bg.webm" as="video" type="video/webm">
 </head>
 
 <body>
   <div class="page-wrapper">
-<!-- Header -->
-<header class="site-header container" role="banner">
-  <div class="logo">
-    <a href="/"><img src="/assets/logo.png" alt="Goodies Logo" /></a>
-  </div>
+    
+    <!-- Header -->
+    <header class="site-header container" role="banner">
+      <div class="logo">
+        <a href="/" aria-label="Goodies Homepage">
+          <img src="/assets/logo.png" alt="Goodies Logo" width="120" height="40">
+        </a>
+      </div>
 
-  <nav id="mainNav" class="main-nav desktop-only" role="navigation" aria-label="Main navigation">
-    <a class="nav-link" href="/"></a>
+      <nav id="mainNav" class="main-nav desktop-only" role="navigation" aria-label="Main navigation">
+        
+        <!-- Discover Dropdown -->
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Discover <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/campaigns">Campaigns</a></li>
+            <li><a class="dropdown-item" href="/directory">Businesses</a></li>
+          </ul>
+        </div>
 
-    <!-- Discover Dropdown -->
-    <div class="nav-item dropdown">
-      <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-        Discover <span class="dropdown-arrow">▾</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a class="dropdown-item" href="/campaigns">Campaigns</a></li>
-        <li><a class="dropdown-item" href="/directory">Businesses</a></li>
-      </ul>
-    </div>
+        <!-- Fundraise Dropdown -->
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Fundraise <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/donate">Donate</a></li>
+            <li><a class="dropdown-item" href="/create">Start a Campaign</a></li>
+          </ul>
+        </div>
 
-    <!-- Fundraise Dropdown -->
-    <div class="nav-item dropdown">
-      <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-        Fundraise <span class="dropdown-arrow">▾</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a class="dropdown-item" href="/donate">Donate</a></li>
-        <li><a class="dropdown-item" href="/dashboard">Start a Goodies</a></li>
-      </ul>
-    </div>
+        <!-- About Dropdown -->
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            About <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/about">Our Mission</a></li>
+            <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
 
-    <!-- About Dropdown -->
-    <div class="nav-item dropdown">
-      <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-        About <span class="dropdown-arrow">▾</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a class="dropdown-item" href="/about">Our Mission</a></li>
-        <li><a class="dropdown-item" href="/team">Meet the Team</a></li>
-        <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
-      </ul>
-    </div>
-  </nav>
+      <div class="header-actions">
+        <button class="header-icon-btn" data-toggle-search aria-label="Search" title="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
 
-  <div class="header-actions">
-    <button class="header-icon-btn" data-toggle-search aria-label="Search">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="11" cy="11" r="7"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-    </button>
+        <a class="header-icon-btn" href="/login" aria-label="Account" title="Account">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
 
-    <a class="header-icon-btn" href="/login" aria-label="Account">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-        <circle cx="12" cy="7" r="4"></circle>
-      </svg>
-    </a>
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="mainNav" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
 
-    <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="mainNav" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+      <div class="header-search" role="search">
+        <input type="search" placeholder="Search campaigns..." aria-label="Search site">
+      </div>
+    </header>
 
-  <div class="header-search">
-    <input type="search" placeholder="Search" aria-label="Search site" />
-  </div>
-</header>
-
-    <!-- HERO (video background) -->
-    <section class="hero" aria-label="Goodies hero">
+    <!-- Hero Section -->
+    <section class="hero" aria-label="Hero section">
       <video
         class="hero__video"
         autoplay
@@ -116,10 +134,11 @@
         preload="metadata"
         poster="/assets/hero-poster.jpg"
         id="heroVideo"
+        aria-hidden="true"
       >
-        <!-- Prefer WebM; include MP4 fallback -->
-        <source src="/assets/hero-bg.webm" type="video/webm" />
-        <source src="/assets/hero-bg.mp4" type="video/mp4" />
+        <source src="/assets/hero-bg.webm" type="video/webm">
+        <source src="/assets/hero-bg.mp4" type="video/mp4">
+        Your browser does not support the video tag.
       </video>
       <div class="hero__scrim" aria-hidden="true"></div>
 
@@ -131,115 +150,112 @@
           <a href="/directory" class="cta-btn cta-outline">Explore Projects</a>
         </div>
       </div>
-
-      <div class="scroll-cue" aria-hidden="true">
-        <svg width="20" height="28" viewBox="0 0 24 32" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="1.5" width="16" height="29" rx="8"></rect><circle cx="12" cy="8" r="2.2"></circle></svg>
-        <span>Scroll</span>
-      </div>
     </section>
 
     <!-- Featured Campaigns -->
-    <section class="featured container section">
-      <h2 class="section-title">Featured Campaigns</h2>
-      <div class="campaign-grid" id="featuredGrid">
-        <article class="campaign-card reveal">
-          <h3>Support Breast Cancer Awareness</h3>
-          <p>Creating awareness that will empower positive change.</p>
-          <div class="progress-wrap">
-            <div class="progress-bar-bg">
-              <div class="progress-bar-fill" style="width:62%"></div>
-            </div>
-            <div class="progress-percent">62%</div>
-          </div>
-          <div class="button-group" style="margin-top:12px">
-            <a href="/dashboard" class="cta-btn">Donate</a>
-            <a href="/create" class="cta-btn cta-outline">View Details</a>
-          </div>
-        </article>
+    <section class="featured container section" aria-labelledby="featured-title">
+      <h2 id="featured-title" class="section-title">Featured Campaigns</h2>
+      <div class="campaign-grid" id="featuredGrid" role="list">
+        <!-- Loading state -->
+        <div class="loading-state" id="loadingState">
+          <div class="spinner" aria-label="Loading campaigns"></div>
+          <p>Loading featured campaigns...</p>
+        </div>
+        
+        <!-- Error state -->
+        <div class="error-state hidden" id="errorState">
+          <p>Unable to load campaigns. <button class="retry-btn" onclick="loadFeaturedCampaigns()">Retry</button></p>
+        </div>
+        
+        <!-- Campaigns will be inserted here dynamically -->
+      </div>
+    </section>
 
-        <article class="campaign-card reveal">
-          <h3>Save the Rainforests</h3>
-          <p>Building infrastructure to alleviate climate change.</p>
-          <div class="progress-wrap">
-            <div class="progress-bar-bg">
-              <div class="progress-bar-fill" style="width:48%"></div>
-            </div>
-            <div class="progress-percent">48%</div>
-          </div>
-          <div class="button-group" style="margin-top:12px">
-            <a href="/dashboard" class="cta-btn">Donate</a>
-            <a href="/create" class="cta-btn cta-outline">View Details</a>
-          </div>
-        </article>
+    <!-- How It Works -->
+    <section class="how-it-works container section" aria-labelledby="how-it-works-title">
+      <h2 id="how-it-works-title" class="section-title">How It Works</h2>
+      <div class="steps-grid">
+        <div class="step-card reveal">
+          <div class="step-number">1</div>
+          <h3>Create Your Campaign</h3>
+          <p>Share your story and set your funding goal.</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-number">2</div>
+          <h3>Share With Community</h3>
+          <p>Spread the word and build support.</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-number">3</div>
+          <h3>Achieve Your Goals</h3>
+          <p>Receive funding and make impact.</p>
+        </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="site-footer">
-      <p>Goodies ® - Building through community.</p>
-      <div class="footer-social" aria-label="Share on social media">
-        <button class="social-btn" data-share="twitter" aria-label="Share on Twitter" title="Share on Twitter">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.86 1.09A4.5 4.5 0 0 0 12 4.47v.56A12.94 12.94 0 0 1 3 1s-4 9 5 13a13 13 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
-        </button>
-        <button class="social-btn" data-share="linkedin" aria-label="Share on LinkedIn" title="Share on LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11.75 19h-2.5v-8.98h2.5v8.98zm-1.25-10.24c-.797 0-1.29-.53-1.29-1.19 0-.67.51-1.19 1.32-1.19.81 0 1.29.52 1.31 1.19 0 .66-.5 1.19-1.34 1.19zm12 10.24h-2.5v-4.8c0-1.21-.43-2.04-1.5-2.04-.82 0-1.31.55-1.53 1.08-.08.2-.1.48-.1.76v4.99h-2.5s.03-8.1 0-8.98h2.5v1.27c.33-.51.92-1.23 2.24-1.23 1.64 0 2.87 1.07 2.87 3.37v5.57z"/></svg>
-        </button>
-        <button class="social-btn" data-share="facebook" aria-label="Share on Facebook" title="Share on Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8.9v-2.9h1.6V9.4c0-1.6.95-2.5 2.4-2.5.7 0 1.4.13 1.4.13v1.6h-.82c-.8 0-1.05.5-1.05 1v1.2h1.78l-.28 2.9h-1.5v7A10 10 0 0 0 22 12z"/></svg>
-        </button>
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-content container">
+        <div class="footer-brand">
+          <img src="/assets/logo.png" alt="Goodies Logo" width="100" height="33">
+          <p>Goodies® – Building through community.</p>
+        </div>
+        
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>Discover</h3>
+            <ul>
+              <li><a href="/campaigns">Campaigns</a></li>
+              <li><a href="/directory">Businesses</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h3>Fundraise</h3>
+            <ul>
+              <li><a href="/create">Start a Campaign</a></li>
+              <li><a href="/donate">Donate</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h3>About</h3>
+            <ul>
+              <li><a href="/about">Our Mission</a></li>
+              <li><a href="/contact">Contact Us</a></li>
+              <li><a href="/privacy">Privacy Policy</a></li>
+              <li><a href="/terms">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-social" aria-label="Social media links">
+          <a href="https://twitter.com/goodies" class="social-btn" aria-label="Twitter" title="Follow us on Twitter" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.86 1.09A4.5 4.5 0 0 0 12 4.47v.56A12.94 12.94 0 0 1 3 1s-4 9 5 13a13 13 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+            </svg>
+          </a>
+          <a href="https://linkedin.com/company/goodies" class="social-btn" aria-label="LinkedIn" title="Connect on LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11.75 19h-2.5v-8.98h2.5v8.98zm-1.25-10.24c-.797 0-1.29-.53-1.29-1.19 0-.67.51-1.19 1.32-1.19.81 0 1.29.52 1.31 1.19 0 .66-.5 1.19-1.34 1.19zm12 10.24h-2.5v-4.8c0-1.21-.43-2.04-1.5-2.04-.82 0-1.31.55-1.53 1.08-.08.2-.1.48-.1.76v4.99h-2.5s.03-8.1 0-8.98h2.5v1.27c.33-.51.92-1.23 2.24-1.23 1.64 0 2.87 1.07 2.87 3.37v5.57z"/>
+            </svg>
+          </a>
+          <a href="https://facebook.com/goodies" class="social-btn" aria-label="Facebook" title="Like us on Facebook" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8.9v-2.9h1.6V9.4c0-1.6.95-2.5 2.4-2.5.7 0 1.4.13 1.4.13v1.6h-.82c-.8 0-1.05.5-1.05 1v1.2h1.78l-.28 2.9h-1.5v7A10 10 0 0 0 22 12z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom container">
+        <p>&copy; 2025 Goodies. All rights reserved.</p>
       </div>
     </footer>
   </div>
 
   <!-- Scripts -->
   <script defer src="/javascript/production.js"></script>
-
-
-  <!-- Page-only progressive enhancement -->
-  <script>
-    // Pause video for users who prefer reduced motion
-    (function() {
-      const video = document.getElementById('heroVideo');
-      if (!video) return;
-      const prm = window.matchMedia('(prefers-reduced-motion: reduce)');
-      if (prm.matches) {
-        video.pause();
-        video.removeAttribute('autoplay');
-      }
-      // Basic parallax: subtle translate on scroll (no jank)
-      let ticking = false;
-      const onScroll = () => {
-        if (ticking) return;
-        window.requestAnimationFrame(() => {
-          const y = window.scrollY || 0;
-          // translate video a tiny bit for depth (reduced motion safe)
-          if (!prm.matches) {
-            video.style.transform = `translate3d(0, ${Math.min(y * 0.08, 24)}px, 0)`;
-          }
-          ticking = false;
-        });
-        ticking = true;
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-    })();
-
-    // Reveal cards on intersection
-    (function(){
-      const els = document.querySelectorAll('.reveal');
-      if (!els.length || 'IntersectionObserver' in window === false) {
-        els.forEach(el => el.classList.add('is-visible'));
-        return;
-      }
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-visible');
-            io.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      els.forEach(el => io.observe(el));
-    })();
-  </script>
+  <script defer src="/javascript/index.js"></script>
 </body>
 </html>

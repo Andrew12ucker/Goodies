@@ -1,278 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Goodies | Campaigns</title>
-  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-
-  <!-- Metadata & Security -->
-  <meta name="description" content="Explore, manage, and support crowdfunding campaigns on Goodies." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Campaigns | Goodies</title>
+  
+  <!-- SEO & Meta -->
+  <meta name="description" content="Explore, manage, and support crowdfunding campaigns on Goodies.">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Security -->
   <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self' https:;
-    script-src 'self' 'unsafe-inline' https://js.stripe.com https://www.paypal.com;
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    img-src 'self' data:;
-    font-src https://fonts.gstatic.com https://fonts.googleapis.com;
+    default-src 'self';
+    script-src 'self' https://js.stripe.com https://www.paypal.com;
+    style-src 'self' https://fonts.googleapis.com;
+    img-src 'self' data: https:;
+    font-src 'self' https://fonts.gstatic.com;
     connect-src 'self' https://api.stripe.com https://www.paypal.com;
     frame-src https://js.stripe.com https://www.paypal.com;
-  " />
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  
   <!-- CSS -->
-    <link rel="stylesheet" href="/css/production.css">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/production.css">
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div class="page-wrapper">
-<!-- Header -->
-<header class="site-header container" role="banner">
-  <div class="logo">
-    <a href="/"><img src="/assets/logo.png" alt="Goodies Logo" /></a>
-  </div>
+    
+    <!-- Header -->
+    <header class="site-header container" role="banner">
+      <div class="logo">
+        <a href="/" aria-label="Goodies Homepage">
+          <img src="/assets/logo.png" alt="Goodies Logo" width="120" height="40">
+        </a>
+      </div>
 
-  <nav id="mainNav" class="main-nav desktop-only" role="navigation" aria-label="Main navigation">
-    <a class="nav-link" href="/"></a>
+      <nav id="mainNav" class="main-nav desktop-only" role="navigation" aria-label="Main navigation">
+        
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Discover <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/campaigns">Campaigns</a></li>
+            <li><a class="dropdown-item" href="/directory">Businesses</a></li>
+          </ul>
+        </div>
 
-    <!-- Discover Dropdown -->
-    <div class="nav-item dropdown">
-      <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-        Discover <span class="dropdown-arrow">▾</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a class="dropdown-item" href="/campaigns">Campaigns</a></li>
-        <li><a class="dropdown-item" href="/directory">Businesses</a></li>
-      </ul>
-    </div>
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Fundraise <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/donate">Donate</a></li>
+            <li><a class="dropdown-item" href="/create">Start a Campaign</a></li>
+          </ul>
+        </div>
 
-    <!-- Fundraise Dropdown -->
-    <div class="nav-item dropdown">
-      <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-        Fundraise <span class="dropdown-arrow">▾</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a class="dropdown-item" href="/donate">Donate</a></li>
-        <li><a class="dropdown-item" href="/dashboard">Start a Goodies</a></li>
-      </ul>
-    </div>
+        <div class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            About <span class="dropdown-arrow">▾</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="dropdown-item" href="/about">Our Mission</a></li>
+            <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
 
-    <!-- About Dropdown -->
-    <div class="nav-item dropdown">
-      <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-        About <span class="dropdown-arrow">▾</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a class="dropdown-item" href="/about">Our Mission</a></li>
-        <li><a class="dropdown-item" href="/team">Meet the Team</a></li>
-        <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
-      </ul>
-    </div>
-  </nav>
+      <div class="header-actions">
+        <button class="header-icon-btn" data-toggle-search aria-label="Search" title="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
 
-  <div class="header-actions">
-    <button class="header-icon-btn" data-toggle-search aria-label="Search">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="11" cy="11" r="7"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-    </button>
+        <a class="header-icon-btn" href="/login" aria-label="Account" title="Account">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
 
-    <a class="header-icon-btn" href="/login" aria-label="Account">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-        <circle cx="12" cy="7" r="4"></circle>
-      </svg>
-    </a>
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="mainNav" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
 
-    <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="mainNav" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-
-  <div class="header-search">
-    <input type="search" placeholder="Search" aria-label="Search site" />
-  </div>
-</header>
+      <div class="header-search" role="search">
+        <input type="search" placeholder="Search campaigns..." aria-label="Search site">
+      </div>
+    </header>
 
     <!-- Hero -->
-    <section class="hero">
-      <h1>Active Campaigns</h1>
+    <section class="hero small-hero">
+      <h1>My Campaigns</h1>
       <p>Track your campaigns and discover opportunities to give back.</p>
     </section>
 
     <!-- Campaign Listing -->
-    <section class="container section-padding">
-      <h2 class="section-title">Your Campaigns</h2>
-      <div id="campaignGrid" class="campaign-grid">
-        <p class="loading-text">Loading campaigns...</p>
+    <section class="container section-padding" aria-labelledby="campaigns-title">
+      <h2 id="campaigns-title" class="section-title">Your Campaigns</h2>
+      
+      <div class="campaigns-filter">
+        <select id="campaignFilter" aria-label="Filter campaigns">
+          <option value="all">All Campaigns</option>
+          <option value="active">Active</option>
+          <option value="completed">Completed</option>
+          <option value="draft">Drafts</option>
+        </select>
       </div>
+      
+      <div id="campaignGrid" class="campaign-grid" role="list">
+        <div class="loading-state">
+          <div class="spinner" aria-label="Loading campaigns"></div>
+          <p>Loading campaigns...</p>
+        </div>
+      </div>
+      
+      <div id="campaignPagination" class="pagination hidden" role="navigation" aria-label="Campaign pagination"></div>
     </section>
 
     <!-- Donations -->
-    <section class="container section-padding">
-      <h2 class="section-title">Your Donations</h2>
-      <div id="donationsList" class="donation-list">
-        <p class="loading-text">Loading donations...</p>
+    <section class="container section-padding" aria-labelledby="donations-title">
+      <h2 id="donations-title" class="section-title">Your Donations</h2>
+      
+      <div id="donationsList" class="donation-list" role="list">
+        <div class="loading-state">
+          <div class="spinner" aria-label="Loading donations"></div>
+          <p>Loading donations...</p>
+        </div>
       </div>
+      
+      <div id="donationPagination" class="pagination hidden" role="navigation" aria-label="Donation pagination"></div>
     </section>
 
-    <!-- Admin Controls -->
-    <section id="adminSection" class="container section-padding" style="display:none;">
-      <h2 class="section-title">Admin Controls</h2>
-      <div class="card">
-        <h3>🛠 Maintenance Mode</h3>
-        <p id="maintenanceStatus">Checking current status...</p>
+    <!-- Admin Controls (Hidden by default) -->
+    <section id="adminSection" class="container section-padding admin-only hidden" aria-labelledby="admin-title">
+      <h2 id="admin-title" class="section-title">⚙️ Admin Controls</h2>
+      
+      <div class="card admin-card">
+        <h3>🛠️ Maintenance Mode</h3>
+        <p id="maintenanceStatus" role="status" aria-live="polite">Checking current status...</p>
         <div class="button-group">
-          <button id="enableMaintenance" class="cta-btn">Enable Maintenance</button>
-          <button id="disableMaintenance" class="cta-btn secondary">Disable Maintenance</button>
+          <button id="enableMaintenance" class="cta-btn" disabled>
+            <span class="btn-text">Enable Maintenance</span>
+            <span class="btn-loader hidden" aria-hidden="true"></span>
+          </button>
+          <button id="disableMaintenance" class="cta-btn secondary" disabled>
+            <span class="btn-text">Disable Maintenance</span>
+            <span class="btn-loader hidden" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="card admin-card">
+        <h3>📊 Platform Statistics</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-label">Total Campaigns</span>
+            <span class="stat-value" id="totalCampaigns">-</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Active Users</span>
+            <span class="stat-value" id="activeUsers">-</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Total Raised</span>
+            <span class="stat-value" id="totalRaised">-</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="site-footer">
-      <p>Goodies ® — Building through community.</p>
-      <div class="footer-social" aria-label="Share on social media">
-        <button class="social-btn" data-share="twitter" aria-label="Share on Twitter" title="Share on Twitter">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.86 1.09A4.5 4.5 0 0 0 12 4.47v.56A12.94 12.94 0 0 1 3 1s-4 9 5 13a13 13 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
-        </button>
-        <button class="social-btn" data-share="linkedin" aria-label="Share on LinkedIn" title="Share on LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11.75 19h-2.5v-8.98h2.5v8.98zm-1.25-10.24c-.797 0-1.29-.53-1.29-1.19 0-.67.51-1.19 1.32-1.19.81 0 1.29.52 1.31 1.19 0 .66-.5 1.19-1.34 1.19zm12 10.24h-2.5v-4.8c0-1.21-.43-2.04-1.5-2.04-.82 0-1.31.55-1.53 1.08-.08.2-.1.48-.1.76v4.99h-2.5s.03-8.1 0-8.98h2.5v1.27c.33-.51.92-1.23 2.24-1.23 1.64 0 2.87 1.07 2.87 3.37v5.57z"/></svg>
-        </button>
-        <button class="social-btn" data-share="facebook" aria-label="Share on Facebook" title="Share on Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8.9v-2.9h1.6V9.4c0-1.6.95-2.5 2.4-2.5.7 0 1.4.13 1.4.13v1.6h-.82c-.8 0-1.05.5-1.05 1v1.2h1.78l-.28 2.9h-1.5v7A10 10 0 0 0 22 12z"/></svg>
-        </button>
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-content container">
+        <div class="footer-brand">
+          <img src="/assets/logo.png" alt="Goodies Logo" width="100" height="33">
+          <p>Goodies® – Building through community.</p>
+        </div>
+        
+        <div class="footer-social" aria-label="Social media links">
+          <a href="https://twitter.com/goodies" class="social-btn" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.86 1.09A4.5 4.5 0 0 0 12 4.47v.56A12.94 12.94 0 0 1 3 1s-4 9 5 13a13 13 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+            </svg>
+          </a>
+          <a href="https://linkedin.com/company/goodies" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11.75 19h-2.5v-8.98h2.5v8.98zm-1.25-10.24c-.797 0-1.29-.53-1.29-1.19 0-.67.51-1.19 1.32-1.19.81 0 1.29.52 1.31 1.19 0 .66-.5 1.19-1.34 1.19zm12 10.24h-2.5v-4.8c0-1.21-.43-2.04-1.5-2.04-.82 0-1.31.55-1.53 1.08-.08.2-.1.48-.1.76v4.99h-2.5s.03-8.1 0-8.98h2.5v1.27c.33-.51.92-1.23 2.24-1.23 1.64 0 2.87 1.07 2.87 3.37v5.57z"/>
+            </svg>
+          </a>
+          <a href="https://facebook.com/goodies" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8.9v-2.9h1.6V9.4c0-1.6.95-2.5 2.4-2.5.7 0 1.4.13 1.4.13v1.6h-.82c-.8 0-1.05.5-1.05 1v1.2h1.78l-.28 2.9h-1.5v7A10 10 0 0 0 22 12z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom container">
+        <p>&copy; 2025 Goodies. All rights reserved.</p>
       </div>
     </footer>
   </div>
 
   <!-- Scripts -->
-    <script defer src="/javascript/production.js"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      const token = localStorage.getItem("goodies_token");
-      const campaignGrid = document.getElementById("campaignGrid");
-      const donationsList = document.getElementById("donationsList");
-      const adminSection = document.getElementById("adminSection");
-
-      if (!token) {
-        campaignGrid.innerHTML = "<p>You must be logged in to view campaigns.</p>";
-        donationsList.innerHTML = "";
-        return;
-      }
-
-      // --- Fetch Campaigns ---
-      try {
-        const res = await fetch("/api/campaigns/user", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        const campaigns = await res.json();
-        if (res.ok && campaigns.length) {
-          campaignGrid.innerHTML = campaigns.map(c => `
-            <div class="campaign-card" data-campaign="${c._id}">
-              <h3>${c.title}</h3>
-              <p>${c.description || ""}</p>
-              <p class="campaign-amounts"><strong>$${c.currentAmount}</strong> raised of $${c.goal}</p>
-              <div class="progress-wrap">
-                <div class="progress-bar-bg">
-                  <div class="progress-bar-fill" style="width:${Math.min((c.currentAmount / c.goal) * 100, 100)}%"></div>
-                </div>
-              </div>
-              <div class="button-group">
-                <button class="cta-btn" data-donate data-provider="stripe" data-campaign="${c._id}" data-amount="25">
-                  Donate with Stripe
-                </button>
-                <button class="cta-btn secondary" data-donate data-provider="paypal" data-campaign="${c._id}" data-amount="25">
-                  Donate with PayPal
-                </button>
-              </div>
-            </div>
-          `).join("");
-        } else {
-          campaignGrid.innerHTML = "<p>No active campaigns found. <a href='/fundraise'>Start one now!</a></p>";
-        }
-      } catch (err) {
-        campaignGrid.innerHTML = "<p>Unable to load campaigns. Try again later.</p>";
-      }
-
-      // --- Fetch Donations ---
-      try {
-        const res = await fetch("/api/donations/me", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        const donations = await res.json();
-        if (res.ok && donations.length) {
-          donationsList.innerHTML = donations.map(d => `
-            <div class="donation-item">
-              <p><strong>${d.campaignTitle}</strong></p>
-              <p>Amount: $${d.amount}</p>
-              <p>Date: ${new Date(d.createdAt).toLocaleDateString()}</p>
-            </div>
-          `).join("");
-        } else {
-          donationsList.innerHTML = "<p>You haven't made any donations yet.</p>";
-        }
-      } catch (err) {
-        donationsList.innerHTML = "<p>Unable to load donations. Please try again later.</p>";
-      }
-
-      // --- Admin Access ---
-      try {
-        const res = await fetch("/api/user/profile", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        const user = await res.json();
-        if (res.ok && user.role === "admin") {
-          adminSection.style.display = "block";
-          initMaintenanceControls();
-        }
-      } catch (err) {
-        console.warn("User role check failed:", err);
-      }
-
-      // --- Logout ---
-      document.getElementById("logoutBtn").addEventListener("click", () => {
-        localStorage.removeItem("goodies_token");
-        window.location.href = "/login";
-      });
-
-      // --- Maintenance Controls ---
-      async function initMaintenanceControls() {
-        const statusEl = document.getElementById("maintenanceStatus");
-        const enableBtn = document.getElementById("enableMaintenance");
-        const disableBtn = document.getElementById("disableMaintenance");
-        const ADMIN_KEY = "supersecureadminkey123";
-
-        async function updateStatus() {
-          const res = await fetch("/api/maintenance", {
-            headers: { Authorization: `Bearer ${ADMIN_KEY}` },
-          });
-          const data = await res.json();
-          statusEl.textContent = `Maintenance Mode is ${data.maintenance ? "ACTIVE" : "INACTIVE"}.`;
-        }
-
-        enableBtn.addEventListener("click", async () => {
-          await fetch("/api/maintenance/enable", {
-            method: "POST",
-            headers: { Authorization: `Bearer ${ADMIN_KEY}` },
-          });
-          updateStatus();
-        });
-
-        disableBtn.addEventListener("click", async () => {
-          await fetch("/api/maintenance/disable", {
-            method: "POST",
-            headers: { Authorization: `Bearer ${ADMIN_KEY}` },
-          });
-          updateStatus();
-        });
-
-        updateStatus();
-      }
-    });
-  </script>
+  <script defer src="/javascript/production.js"></script>
+  <script defer src="/javascript/campaigns.js"></script>
 </body>
 </html>

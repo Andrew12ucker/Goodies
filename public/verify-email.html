@@ -4,33 +4,233 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Goodies | Verify Email</title>
-<!-- CSS -->
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/animations.css">
-<link rel="stylesheet" href="css/utilities.css">
+  <meta name="description" content="Verify your Goodies account email address." />
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/utilities.css">
   <link rel="stylesheet" href="css/header.css" />
   <link rel="stylesheet" href="css/footer.css" />
+  
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .site-header {
+      position: absolute;
+      top: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo img {
+      max-width: 180px;
+      height: auto;
+    }
+
+    .verify-card {
+      max-width: 500px;
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+      padding: 3rem 2.5rem;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 0.6s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .status-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .status-icon.loading {
+      background: #f0f0f0;
+    }
+
+    .status-icon.success {
+      background: #10b981;
+      animation: scaleIn 0.5s ease;
+    }
+
+    .status-icon.error {
+      background: #ef4444;
+      animation: scaleIn 0.5s ease;
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+    .loader {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(0, 0, 0, 0.1);
+      border-top: 3px solid #000;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .status-icon svg {
+      width: 40px;
+      height: 40px;
+      color: white;
+    }
+
+    h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #000;
+    }
+
+    #verifyMessage {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    #verifyMessage.success {
+      color: #10b981;
+    }
+
+    #verifyMessage.error {
+      color: #ef4444;
+    }
+
+    .action-links {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .action-links a {
+      color: #000;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      margin: 0 0.75rem;
+      transition: color 0.3s ease;
+    }
+
+    .action-links a:hover {
+      color: #666;
+      text-decoration: underline;
+    }
+
+    .site-footer {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #666;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      .verify-card {
+        padding: 2.5rem 2rem;
+      }
+
+      .status-icon {
+        width: 70px;
+        height: 70px;
+      }
+
+      .status-icon svg,
+      .loader {
+        width: 35px;
+        height: 35px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <div class="page-wrapper centered-page">
+  <div class="page-wrapper">
     <header class="site-header">
-      <a href="/" class="logo"><img src="/assets/logo.png" alt="Goodies Logo" /></a>
+      <a href="/" class="logo">
+        <img src="/assets/logo.png" alt="Goodies Logo" />
+      </a>
     </header>
 
-    <main class="card verify-card fade-in">
+    <main class="verify-card">
+      <div id="statusIcon" class="status-icon loading">
+        <div class="loader" role="status" aria-label="Verifying"></div>
+      </div>
+      
       <h1>Email Verification</h1>
-      <p id="verifyMessage">Verifying your email, please wait...</p>
+      <p id="verifyMessage" aria-live="polite">Verifying your email, please wait...</p>
+      
+      <div id="actionLinks" class="action-links" style="display: none;">
+        <a href="/login">Go to Login</a>
+        <a href="/register">Create Account</a>
+      </div>
     </main>
 
     <footer class="site-footer">
-      <p>Goodies ® — Building through community.</p>
+      <p>Goodies &reg; - Building through community.</p>
     </footer>
   </div>
 
@@ -38,16 +238,62 @@
     async function verifyEmail() {
       const urlParams = new URLSearchParams(window.location.search);
       const token = urlParams.get("token");
-      const res = await fetch(`/api/auth/verify-email?token=${token}`);
-      const data = await res.json();
-      const msg = document.getElementById("verifyMessage");
-      if (res.ok) {
-        msg.textContent = "✅ Your email has been verified! Redirecting...";
-        setTimeout(() => window.location.href = "/login", 3000);
-      } else {
-        msg.textContent = `❌ Verification failed: ${data.message || "Invalid token."}`;
+      const messageEl = document.getElementById("verifyMessage");
+      const statusIcon = document.getElementById("statusIcon");
+      const actionLinks = document.getElementById("actionLinks");
+
+      if (!token) {
+        statusIcon.className = "status-icon error";
+        statusIcon.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>
+        `;
+        messageEl.textContent = "Verification token is missing. Please check your email link.";
+        messageEl.className = "error";
+        actionLinks.style.display = "block";
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/auth/verify-email?token=${encodeURIComponent(token)}`);
+        const data = await res.json();
+
+        if (res.ok) {
+          statusIcon.className = "status-icon success";
+          statusIcon.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          `;
+          messageEl.textContent = data.message || "Your email has been verified! Redirecting to login...";
+          messageEl.className = "success";
+          
+          setTimeout(() => {
+            window.location.href = "/login";
+          }, 3000);
+        } else {
+          throw new Error(data.message || "Verification failed");
+        }
+      } catch (err) {
+        console.error("Verification error:", err);
+        statusIcon.className = "status-icon error";
+        statusIcon.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>
+        `;
+        messageEl.textContent = err.message || "Verification failed. The token may be invalid or expired.";
+        messageEl.className = "error";
+        actionLinks.style.display = "block";
       }
     }
+
+    // Start verification when page loads
     verifyEmail();
   </script>
 </body>

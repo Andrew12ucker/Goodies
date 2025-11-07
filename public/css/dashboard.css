@@ -1,23 +1,672 @@
-/* ================================
-   Dashboard Styles
-================================= */
+/* ============================================================
+   dashboard.css - Campaign Dashboard Styles
+   ============================================================ */
 
-.dashboard {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 2rem;
-  margin-top: 3rem;
+/* Dashboard Layout */
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8f9fa;
 }
 
-.dashboard .sidebar {
-  background: #f7f7f7;
-  padding: 2rem;
-  border-radius: 10px;
+/* Sidebar */
+.dashboard-sidebar {
+  width: 260px;
+  background-color: #fff;
+  border-right: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
 }
 
-.dashboard .main {
+.sidebar-header {
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.sidebar-logo img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #6c757d;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.nav-item:hover {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.nav-item.active {
+  background-color: #e7f3ff;
+  color: #0066cc;
+  border-right: 3px solid #0066cc;
+}
+
+.nav-item svg {
+  flex-shrink: 0;
+}
+
+.sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.user-menu {
+  margin-top: 1rem;
+  position: relative;
+}
+
+.user-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.user-menu-trigger:hover {
+  background: #e9ecef;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-dropdown {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
   background: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: 0.5rem;
+  overflow: hidden;
 }
+
+.user-dropdown a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #212529;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.user-dropdown a:hover {
+  background: #f8f9fa;
+}
+
+/* Main Content */
+.dashboard-main {
+  flex: 1;
+  margin-left: 260px;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.header-content h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #212529;
+}
+
+.header-subtitle {
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Filter Tabs */
+.dashboard-filters {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e9ecef;
+  overflow-x: auto;
+}
+
+.filter-tab {
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #6c757d;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: -2px;
+}
+
+.filter-tab:hover {
+  color: #212529;
+}
+
+.filter-tab.active {
+  color: #0066cc;
+  border-bottom-color: #0066cc;
+}
+
+.filter-tab .badge {
+  background: #e9ecef;
+  color: #6c757d;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.filter-tab.active .badge {
+  background: #0066cc;
+  color: #fff;
+}
+
+/* Loading & Empty States */
+.loading-state,
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.loading-state .spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #0066cc;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.empty-state svg {
+  color: #adb5bd;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #212529;
+}
+
+.empty-state p {
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+/* Campaigns Grid */
+.campaigns-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Campaign Card */
+.campaign-card {
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.campaign-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.campaign-card-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.campaign-status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-draft {
+  background: #f8f9fa;
+  color: #6c757d;
+}
+
+.status-active {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-paused {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-completed {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.status-failed,
+.status-cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.card-menu-btn {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  color: #6c757d;
+  transition: color 0.2s;
+}
+
+.card-menu-btn:hover {
+  color: #212529;
+}
+
+.campaign-card-image {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: #f8f9fa;
+}
+
+.campaign-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.campaign-card-body {
+  padding: 1.25rem;
+  flex: 1;
+}
+
+.campaign-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #212529;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.campaign-category {
+  color: #6c757d;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+
+.campaign-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  font-size: 1.125rem;
+  color: #212529;
+  font-weight: 600;
+}
+
+.stat span {
+  display: block;
+  font-size: 0.75rem;
+  color: #6c757d;
+  text-transform: uppercase;
+}
+
+.campaign-progress {
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0066cc, #0052a3);
+  transition: width 0.3s;
+}
+
+.progress-text {
+  font-size: 0.875rem;
+  color: #6c757d;
+  text-align: center;
+}
+
+.campaign-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.campaign-card-footer {
+  padding: 1rem;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-ghost {
+  background: none;
+  color: #0066cc;
+  border: 1px solid #0066cc;
+}
+
+.btn-ghost:hover {
+  background: #e7f3ff;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-container {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 10000;
+}
+
+.modal-large {
+  max-width: 900px;
+}
+
+.modal-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: #6c757d;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #212529;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* Analytics Styles */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.analytics-card {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  gap: 1rem;
+}
+
+.analytics-icon {
+  width: 48px;
+  height: 48px;
+  background: #e7f3ff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0066cc;
+  flex-shrink: 0;
+}
+
+.analytics-data {
+  flex: 1;
+}
+
+.analytics-label {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 0.25rem;
+}
+
+.analytics-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+.analytics-section {
+  margin-bottom: 2rem;
+}
+
+.analytics-section h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.progress-detail {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.progress-bar-large {
+  height: 16px;
+  background: #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-stats strong {
+  color: #212529;
+  font-weight: 600;
+}
+
+.progress-stats span {
+  color: #6c757d;
+  margin: 0 0.25rem;
+}
+
+.engagement-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.engagement-stat {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.engagement-label {
+  display: block;
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+}
+
+.engagement-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+  
+  .dashboard-sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .dashboard-main {
+    margin-left: 0;
+    padding: 1rem;
+  }
+  
+  .campaigns-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .header-content h1 {
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-filters {
+    overflow-x: auto;
+  }
+  
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Utility Classes */
+.hidden {
+  display: none !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
