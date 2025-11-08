@@ -1,4 +1,3 @@
-// server/models/ProcessedEvent.js
 const mongoose = require('mongoose');
 
 const processedEventSchema = new mongoose.Schema({
@@ -6,7 +5,7 @@ const processedEventSchema = new mongoose.Schema({
   processedAt: { type: Date, default: Date.now },
 });
 
-// Auto-expire records after 90 days (optional cleanup)
+// Auto-expire records after 90 days
 processedEventSchema.index(
   { processedAt: 1 },
   { expireAfterSeconds: 90 * 24 * 60 * 60 }

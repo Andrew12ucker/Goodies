@@ -10,6 +10,8 @@ const helmet = require("helmet");
 const compression = require("compression");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const rateLimit = require("express-rate-limit");
+const mongoSanitize = require("express-mongo-sanitize");
 const passport = require("./config/oauth");
 const connectDB = require("./config/db");
 const path = require("path");
@@ -36,13 +38,19 @@ app.use(helmet());
 app.use(compression());
 
 // --- CORS ---
-const allowedOrigin = process.env.CLIENT_URL || "http://localhost:3000";
+const allowedOrigin = process.env.CLIENT_URL || "https://goodies.com";
 app.use(
   cors({
     origin: allowedOrigin,
     credentials: true,
   })
 );
+
+// --- request hardening ---
+app.use(mongoSanitize()); // strips $ and . from keys to prevent operator injection
+const generalLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 300 });
+const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 50 });
+app.use(generalLimiter);
 
 // --- sessions (for OAuth) ---
 app.use(
@@ -76,7 +84,7 @@ console.log(`🌐 Serving static files from: ${publicPath}`);
 
 // --- API routes ---
 try {
-  app.use("/api/auth", require("./routes/auth"));
+  app.use("/api/auth", authLimiter, require("./routes/auth"));
   console.log("✅ Auth routes loaded successfully.");
 } catch (err) {
   console.warn("⚠️ Auth routes not found:", err.message);

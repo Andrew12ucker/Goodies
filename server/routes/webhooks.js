@@ -1,4 +1,3 @@
-// server/routes/webhooks.js
 const express = require('express');
 const { handleStripeWebhook } = require('../controllers/webhookController');
 

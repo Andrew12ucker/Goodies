@@ -1,4 +1,3 @@
-// server/routes/campaigns.js
 const express = require('express');
 const router = express.Router();
 const Campaign = require('../models/Campaign');
@@ -6,11 +5,11 @@ const { protect, optionalAuth } = require('../middleware/auth');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const Joi = require('joi');
 
-// ---------- Multer config ----------
+// --- Upload config ---
 const uploadDir = path.join(__dirname, '..', 'uploads', 'campaigns');
 fs.mkdirSync(uploadDir, { recursive: true });
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
   filename: (req, file, cb) => {
@@ -18,7 +17,6 @@ const storage = multer.diskStorage({
     cb(null, `campaign-${unique}${path.extname(file.originalname)}`);
   },
 });
-
 const upload = multer({
   storage,
   limits: { fileSize: 5 * 1024 * 1024 },
@@ -31,18 +29,30 @@ const upload = multer({
   },
 });
 
-// ---------- PUBLIC ROUTES ----------
+// --- Validation ---
+const createSchema = Joi.object({
+  title: Joi.string().min(3).max(120).required(),
+  description: Joi.string().min(10).max(5000).required(),
+  goal: Joi.number().positive().precision(2).required(),
+  category: Joi.string().min(2).max(100).required(),
+  deadline: Joi.date().iso().required(),
+});
+
+// --- Routes ---
 router.get('/', optionalAuth, async (req, res) => {
   try {
     const { status = 'active', page = 1, limit = 12 } = req.query;
-    const query = !req.user ? { status: 'active' } : { status };
-    const skip = (page - 1) * limit;
+    const qStatus = !req.user ? 'active' : status;
+    const query = { status: qStatus };
+    const pageNum = Math.max(1, parseInt(page, 10) || 1);
+    const limitNum = Math.min(50, Math.max(1, parseInt(limit, 10) || 12));
+    const skip = (pageNum - 1) * limitNum;
 
     const [campaigns, total] = await Promise.all([
       Campaign.find(query)
         .sort('-createdAt')
-        .limit(Number(limit))
-        .skip(Number(skip))
+        .limit(limitNum)
+        .skip(skip)
         .select('-comments -updates'),
       Campaign.countDocuments(query),
     ]);
@@ -51,8 +61,8 @@ router.get('/', optionalAuth, async (req, res) => {
       campaigns,
       pagination: {
         total,
-        page: Number(page),
-        pages: Math.ceil(total / limit),
+        page: pageNum,
+        pages: Math.ceil(total / limitNum),
       },
     });
   } catch (err) {
@@ -73,27 +83,27 @@ router.get('/:id', optionalAuth, async (req, res) => {
   }
 });
 
-// ---------- AUTHENTICATED ROUTES ----------
 router.post('/', protect, upload.single('image'), async (req, res) => {
   try {
-    const { title, description, goal, category, deadline } = req.body;
-    if (!title || !description || !goal || !category || !deadline)
-      return res.status(400).json({ message: 'Missing required fields' });
-
-    if (!req.file)
+    const { error, value } = createSchema.validate(req.body, { abortEarly: false, stripUnknown: true });
+    if (error) {
+      return res.status(400).json({ message: 'Validation failed', details: error.details.map(d => d.message) });
+    }
+    if (!req.file) {
       return res.status(400).json({ message: 'Image is required' });
+    }
 
+    const { title, description, goal, category, deadline } = value;
     const campaign = await Campaign.create({
       title,
       description,
-      goal: parseFloat(goal),
+      goal: Number(goal),
       category,
       deadline: new Date(deadline),
       image: `/uploads/campaigns/${req.file.filename}`,
       creator: req.user._id,
       status: 'draft',
     });
-
     res.status(201).json({ message: 'Campaign created successfully', campaign });
   } catch (err) {
     console.error('Error creating campaign:', err);
@@ -101,7 +111,6 @@ router.post('/', protect, upload.single('image'), async (req, res) => {
   }
 });
 
-// GET current user's campaigns
 router.get('/my/campaigns', protect, async (req, res) => {
   try {
     const campaigns = await Campaign.find({ creator: req.user._id }).sort('-createdAt');
